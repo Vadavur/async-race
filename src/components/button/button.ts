@@ -1,0 +1,14 @@
+import './button.scss';
+import { BaseComponent } from '../../old-components/shared/base-component';
+
+export class Button extends BaseComponent {
+  constructor(
+    styles: string[],
+    buttonText = '',
+    buttonAction: (event: Event) => void
+  ) {
+    super('button', styles);
+    this.element.innerHTML = buttonText.toUpperCase();
+    this.element.addEventListener('click', buttonAction);
+  }
+}
