@@ -6,6 +6,8 @@ import { Button } from '../shared/button/button';
 import { BUTTONS } from '../shared/constants';
 
 export class PageField extends BaseComponent {
+  private readonly buttonField: HTMLDivElement;
+
   private readonly garageButton: Button;
 
   private readonly winnersButton: Button;
@@ -22,6 +24,8 @@ export class PageField extends BaseComponent {
 
     this.showGarageField();
 
+    this.buttonField = document.createElement('div');
+
     this.garageButton = new Button(
       [BUTTONS.toGarage.className],
       BUTTONS.toGarage.label,
@@ -33,8 +37,9 @@ export class PageField extends BaseComponent {
       this.showWinnersField
     );
 
-    this.element.appendChild(this.garageButton.element);
-    this.element.appendChild(this.winnersButton.element);
+    this.element.appendChild(this.buttonField);
+    this.buttonField.appendChild(this.garageButton.element);
+    this.buttonField.appendChild(this.winnersButton.element);
     this.element.appendChild(this.garageField.element);
     this.element.appendChild(this.winnersField.element);
   }
