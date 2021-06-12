@@ -2,7 +2,7 @@ import './popup-register-form.scss';
 import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 import { BaseComponent } from '../shared/base-component';
 import { PopupInput } from '../popup-input/popup-input';
-import { Button } from '../../components/button/button';
+import { Button } from '../../components/shared/button/button';
 import { removePopup } from '../shared/remove-popup';
 import { UserInterface } from '../shared/interfaces';
 import {

@@ -1,24 +1,51 @@
 import './page-field.scss';
 import { BaseComponent } from '../shared/base-component';
-import {} from '../shared/constants';
+import { GarageField } from '../garage-field/garage-field';
+import { WinnersField } from '../winners-field/winners-field';
+import { Button } from '../shared/button/button';
+import { BUTTONS } from '../shared/constants';
 
 export class PageField extends BaseComponent {
-  private readonly headerField: HeaderField;
+  private readonly garageButton: Button;
 
-  private readonly rootField: RootField;
+  private readonly winnersButton: Button;
+
+  private readonly garageField: GarageField;
+
+  private readonly winnersField: WinnersField;
 
   constructor() {
     super('div', ['page-field']);
-    this.headerField = new HeaderField();
-    this.rootField = new RootField();
-    this.element.appendChild(this.headerField.element);
-    this.element.appendChild(this.rootField.element);
-    window.history.pushState(
-      ROUTE_PATHS.aboutMe,
-      MM_GAME.title,
-      ROUTE_PATHS.aboutMe
+
+    this.garageField = new GarageField();
+    this.winnersField = new WinnersField();
+
+    this.showGarageField();
+
+    this.garageButton = new Button(
+      [BUTTONS.toGarage.className],
+      BUTTONS.toGarage.label,
+      this.showGarageField
     );
-    const router = new Router(this.headerField.navField);
-    router.changeRootField();
+    this.winnersButton = new Button(
+      [BUTTONS.toWinners.className],
+      BUTTONS.toWinners.label,
+      this.showWinnersField
+    );
+
+    this.element.appendChild(this.garageButton.element);
+    this.element.appendChild(this.winnersButton.element);
+    this.element.appendChild(this.garageField.element);
+    this.element.appendChild(this.winnersField.element);
+  }
+
+  private showGarageField() {
+    this.winnersField.element.style.display = 'none';
+    this.garageField.element.style.display = 'block';
+  }
+
+  private showWinnersField() {
+    this.garageField.element.style.display = 'none';
+    this.winnersField.element.style.display = 'block';
   }
 }

@@ -1,7 +1,7 @@
 import './header-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
 import { CurrentUserAvatar } from '../current-user-avatar/current-user-avatar';
-import { Button } from '../../components/button/button';
+import { Button } from '../../components/shared/button/button';
 import { startGame, stopGame, exitGame } from '../shared/game-controls';
 import { showPopup } from '../shared/show-popup';
 import { GAME_STATES, CUSTOM_EVENTS } from '../../components/shared/constants';

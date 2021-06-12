@@ -2,7 +2,7 @@ import './game-over-popup.scss';
 import '../popup-field/popup-field.scss';
 import { BaseComponent } from '../shared/base-component';
 import { removePopup } from '../shared/remove-popup';
-import { Button } from '../../components/button/button';
+import { Button } from '../../components/shared/button/button';
 import { stopGame } from '../shared/game-controls';
 
 export class GameOverPopup extends BaseComponent {
