@@ -1,5 +1,5 @@
 import './button.scss';
-import { BaseComponent } from '../../../old-components/shared/base-component';
+import { BaseComponent } from '../base-component';
 
 export class Button extends BaseComponent {
   constructor(

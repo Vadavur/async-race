@@ -11,7 +11,7 @@ export const BUTTONS = {
   },
   createCar: {
     label: 'create'.toUpperCase(),
-    className: 'btn_create',
+    className: 'btn_creation',
   },
   updateCar: {
     label: 'update'.toUpperCase(),
@@ -27,15 +27,15 @@ export const BUTTONS = {
   },
   generateCars: {
     label: 'generate cars'.toUpperCase(),
-    className: 'btn_generate',
+    className: 'btn_generation',
   },
   selectCar: {
     label: 'select'.toUpperCase(),
-    className: 'btn_select',
+    className: 'btn_selection',
   },
   removeCar: {
     label: 'remove'.toUpperCase(),
-    className: 'btn_remove',
+    className: 'btn_removal',
   },
   startCarTest: {
     label: 'start'.toUpperCase(),
