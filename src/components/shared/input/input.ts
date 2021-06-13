@@ -1,0 +1,11 @@
+import './input.scss';
+import { BaseComponent } from '../base-component';
+
+export class Input extends BaseComponent {
+  constructor(attributes: { [type: string]: string }) {
+    super('input', ['input']);
+    Object.entries(attributes).forEach((attr) => {
+      this.element.setAttribute(attr[0], attr[1]);
+    });
+  }
+}

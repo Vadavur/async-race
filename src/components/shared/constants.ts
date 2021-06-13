@@ -56,3 +56,30 @@ export const BUTTONS = {
 };
 
 export const END_RACE_MESSAGE = 'Race is over';
+
+export const INPUTS_ATTRIBUTES = {
+  createCarName: {
+    type: 'text',
+    placeholder: 'Car make and model',
+    name: 'car-name-create',
+    required: '',
+    pattern: `/^[^ ]+ [^ ]+/`,
+    onInvalidValueText: `This input field should contain car make and model devided by space`,
+  },
+  updateCarName: {
+    type: 'text',
+    placeholder: 'Car make and model',
+    name: 'car-name-update',
+    pattern: `/^[^ ]+ [^ ]+/`,
+    onInvalidValueText: `This input field should contain car make and model devided by space`,
+  },
+  createCarColor: {
+    type: 'color',
+    name: 'car-color-create',
+    required: '',
+  },
+  updateCarColor: {
+    type: 'color',
+    name: 'car-color-update',
+  },
+};

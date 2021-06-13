@@ -3,7 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { CarDataForm } from '../car-data-form/car-data-form';
 import { ControlPanel } from '../control-panel/control-panel';
 import { CarsField } from '../cars-field/cars-field';
-import { BUTTONS } from '../shared/constants';
+import { BUTTONS, INPUTS_ATTRIBUTES } from '../shared/constants';
 
 export class GarageField extends BaseComponent {
   private readonly createCarForm: CarDataForm;
@@ -17,8 +17,16 @@ export class GarageField extends BaseComponent {
   constructor() {
     super('div', ['garage-field']);
 
-    this.createCarForm = new CarDataForm(BUTTONS.createCar);
-    this.updateCarForm = new CarDataForm(BUTTONS.updateCar);
+    this.createCarForm = new CarDataForm(
+      INPUTS_ATTRIBUTES.createCarName,
+      INPUTS_ATTRIBUTES.createCarColor,
+      BUTTONS.createCar
+    );
+    this.updateCarForm = new CarDataForm(
+      INPUTS_ATTRIBUTES.updateCarName,
+      INPUTS_ATTRIBUTES.updateCarColor,
+      BUTTONS.updateCar
+    );
     this.controlPanel = new ControlPanel();
     this.carsField = new CarsField();
 
