@@ -22,6 +22,5 @@ export class CarDataForm extends BaseComponent {
     this.element.appendChild(this.carNameInput.element);
     this.element.appendChild(this.carColorInput.element);
     this.element.appendChild(this.submitButton.element);
-    console.log('remove this plug flag');
   }
 }
