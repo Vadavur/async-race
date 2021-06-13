@@ -2,8 +2,9 @@ import './garage-field.scss';
 import { BaseComponent } from '../shared/base-component';
 import { CarDataForm } from '../car-data-form/car-data-form';
 import { ControlPanel } from '../control-panel/control-panel';
-import { CarsField } from '../cars-field/cars-field';
+import { RaceField } from '../race-field/race-field';
 import { BUTTONS, INPUTS_ATTRIBUTES } from '../shared/constants';
+import { GarageViewService } from '../services/garage-view-service';
 
 export class GarageField extends BaseComponent {
   private readonly createCarForm: CarDataForm;
@@ -12,7 +13,9 @@ export class GarageField extends BaseComponent {
 
   private readonly controlPanel: ControlPanel;
 
-  private readonly carsField: CarsField;
+  private readonly raceField: RaceField;
+
+  private readonly garageViewer: GarageViewService;
 
   constructor() {
     super('div', ['garage-field']);
@@ -28,11 +31,12 @@ export class GarageField extends BaseComponent {
       BUTTONS.updateCar
     );
     this.controlPanel = new ControlPanel();
-    this.carsField = new CarsField();
-
+    this.raceField = new RaceField();
+    this.garageViewer = new GarageViewService(this.raceField);
+    this.garageViewer.generateRaceField();
     this.element.appendChild(this.createCarForm.element);
     this.element.appendChild(this.updateCarForm.element);
     this.element.appendChild(this.controlPanel.element);
-    this.element.appendChild(this.carsField.element);
+    this.element.appendChild(this.raceField.element);
   }
 }

@@ -1,7 +1,7 @@
 import {} from '../shared/constants';
 import { GarageField } from '../garage-field/garage-field';
 
-export class RaceService {
+export class RaceControlService {
   private readonly garageField: GarageField;
 
   constructor(garageField: GarageField) {

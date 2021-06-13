@@ -4,8 +4,8 @@ import { GarageField } from '../garage-field/garage-field';
 import { WinnersField } from '../winners-field/winners-field';
 import { Button } from '../shared/button/button';
 import { BUTTONS } from '../shared/constants';
-import { GarageService } from '../services/garage-service';
-import { RaceService } from '../services/race-service';
+import { GarageDataService } from '../services/garage-data-service';
+import { RaceControlService } from '../services/race-control-service';
 
 export class PageField extends BaseComponent {
   private readonly buttonField: HTMLDivElement;
@@ -18,9 +18,9 @@ export class PageField extends BaseComponent {
 
   readonly winnersField: WinnersField;
 
-  private readonly garageController: GarageService;
+  private readonly garageDataHandler: GarageDataService;
 
-  private readonly raceController: RaceService;
+  private readonly raceController: RaceControlService;
 
   constructor() {
     super('div', ['page-field']);
@@ -44,7 +44,7 @@ export class PageField extends BaseComponent {
     this.buttonField.appendChild(this.winnersButton.element);
     this.element.appendChild(this.garageField.element);
     this.element.appendChild(this.winnersField.element);
-    this.garageController = new GarageService(this.garageField);
-    this.raceController = new RaceService(this.garageField);
+    this.garageDataHandler = new GarageDataService(this.garageField);
+    this.raceController = new RaceControlService(this.garageField);
   }
 }
