@@ -1,5 +1,5 @@
-import {} from './shared/constants';
-import { GarageField } from './garage-field/garage-field';
+import {} from '../shared/constants';
+import { GarageField } from '../garage-field/garage-field';
 
 export class GarageService {
   private readonly garageField: GarageField;

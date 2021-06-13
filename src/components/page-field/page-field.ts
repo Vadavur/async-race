@@ -4,19 +4,19 @@ import { GarageField } from '../garage-field/garage-field';
 import { WinnersField } from '../winners-field/winners-field';
 import { Button } from '../shared/button/button';
 import { BUTTONS } from '../shared/constants';
-import { GarageService } from '../garage-service';
-import { RaceService } from '../race-service';
+import { GarageService } from '../services/garage-service';
+import { RaceService } from '../services/race-service';
 
 export class PageField extends BaseComponent {
   private readonly buttonField: HTMLDivElement;
 
-  private readonly garageButton: Button;
+  readonly garageButton: Button;
 
-  private readonly winnersButton: Button;
+  readonly winnersButton: Button;
 
-  private readonly garageField: GarageField;
+  readonly garageField: GarageField;
 
-  private readonly winnersField: WinnersField;
+  readonly winnersField: WinnersField;
 
   private readonly garageController: GarageService;
 
@@ -27,20 +27,16 @@ export class PageField extends BaseComponent {
 
     this.garageField = new GarageField();
     this.winnersField = new WinnersField();
-
-    this.showGarageField();
-
     this.buttonField = document.createElement('div');
+    this.buttonField.classList.add('page-field__button-field');
 
     this.garageButton = new Button(
       [BUTTONS.toGarage.className],
-      BUTTONS.toGarage.label,
-      this.showGarageField
+      BUTTONS.toGarage.label
     );
     this.winnersButton = new Button(
       [BUTTONS.toWinners.className],
-      BUTTONS.toWinners.label,
-      this.showWinnersField
+      BUTTONS.toWinners.label
     );
 
     this.element.appendChild(this.buttonField);
@@ -50,15 +46,5 @@ export class PageField extends BaseComponent {
     this.element.appendChild(this.winnersField.element);
     this.garageController = new GarageService(this.garageField);
     this.raceController = new RaceService(this.garageField);
-  }
-
-  private showGarageField() {
-    this.winnersField.element.style.display = 'none';
-    this.garageField.element.style.display = 'block';
-  }
-
-  private showWinnersField() {
-    this.garageField.element.style.display = 'none';
-    this.winnersField.element.style.display = 'block';
   }
 }
