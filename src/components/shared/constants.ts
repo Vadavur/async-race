@@ -100,4 +100,9 @@ export const TEXT_TEMPLATES = {
     parameterFields: [],
     className: 'page-field__game-title',
   },
+  carName: {
+    text: '_carName_',
+    parameterFields: ['_carName_'],
+    className: 'car-name',
+  },
 };

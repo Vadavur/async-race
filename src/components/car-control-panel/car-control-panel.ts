@@ -1,9 +1,9 @@
-import './control-panel.scss';
+import './car-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
 import { Button } from '../shared/button/button';
 import { BUTTONS } from '../shared/constants';
 
-export class ControlPanel extends BaseComponent {
+export class CarControlPanel extends BaseComponent {
   private readonly startRaceButton: Button;
 
   private readonly resetGarageButton: Button;
@@ -11,7 +11,7 @@ export class ControlPanel extends BaseComponent {
   private readonly generateCarsButton: Button;
 
   constructor() {
-    super('div', ['control-panel']);
+    super('div', ['car-control-panel']);
     this.startRaceButton = new Button(
       [BUTTONS.startRace.className],
       BUTTONS.startRace.label
