@@ -106,3 +106,7 @@ export const TEXT_TEMPLATES = {
     className: 'car-name',
   },
 };
+
+export const TRACK_LINES_NUMBER = 7;
+
+export const WINNERS_NUMBER = 10;
