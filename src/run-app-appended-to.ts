@@ -1,10 +1,10 @@
 import { PageField } from './components/page-field/page-field';
-import { PagesService } from './components/services/pages-service';
+import { ViewService } from './components/services/view-service';
 
 export function runAppAppendedTo(rootElement: HTMLElement): void {
   const pageField = new PageField();
-  const pagesHandler = new PagesService(pageField);
-  pagesHandler.showGarageField();
+  const viewHandler = new ViewService(pageField);
+  viewHandler.showGarageField();
   rootElement.appendChild(pageField.element);
 }
 

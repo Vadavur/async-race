@@ -39,9 +39,9 @@ export class PageField extends BaseComponent {
       BUTTONS.toWinners.label
     );
 
-    this.element.appendChild(this.buttonField);
     this.buttonField.appendChild(this.garageButton.element);
     this.buttonField.appendChild(this.winnersButton.element);
+    this.element.appendChild(this.buttonField);
     this.element.appendChild(this.garageField.element);
     this.element.appendChild(this.winnersField.element);
     this.garageDataHandler = new GarageDataService(this.garageField);

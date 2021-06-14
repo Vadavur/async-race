@@ -1,9 +1,13 @@
 .race-field {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background-color: #fff;
+  align-items: start;
+}
+
+.race-field__button-field {
+  width: 20rem;
+  height: 3rem;
+  margin: 2rem;
 }

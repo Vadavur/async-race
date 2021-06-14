@@ -83,3 +83,16 @@ export const INPUTS_ATTRIBUTES = {
     name: 'car-color-update',
   },
 };
+
+export const TEXT_TEMPLATES = {
+  garageTitle: {
+    text: 'Garage (_carNumber_)',
+    parameterFields: ['_carNumber_'],
+    className: 'txt_garage-title',
+  },
+  pageTitle: {
+    text: 'Page #_pageNumber_',
+    parameterFields: ['_pageNumber_'],
+    className: 'txt_text-title',
+  },
+};

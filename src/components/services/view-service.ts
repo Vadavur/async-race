@@ -1,7 +1,7 @@
 import {} from '../shared/constants';
 import { PageField } from '../page-field/page-field';
 
-export class PagesService {
+export class ViewService {
   private readonly pageField: PageField;
 
   constructor(pageField: PageField) {

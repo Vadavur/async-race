@@ -1,8 +1,8 @@
-import './cars-field.scss';
+import './track-field.scss';
 import { BaseComponent } from '../shared/base-component';
 import { PlugField } from '../plug-field/plug-field';
 
-export class CarsField extends BaseComponent {
+export class TrackField extends BaseComponent {
   private readonly plugField: PlugField;
 
   constructor() {
