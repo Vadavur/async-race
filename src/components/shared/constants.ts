@@ -86,7 +86,7 @@ export const INPUTS_ATTRIBUTES = {
 
 export const TEXT_TEMPLATES = {
   garageTitle: {
-    text: 'Garage (_carNumber_)',
+    text: 'Garage (_carNumber_ cars)',
     parameterFields: ['_carNumber_'],
     className: 'txt_garage-title',
   },

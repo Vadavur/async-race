@@ -20,6 +20,8 @@ export class PageField extends BaseComponent {
 
   readonly winnersField: WinnersField;
 
+  readonly finishLine: HTMLDivElement;
+
   private readonly garageDataHandler: GarageDataService;
 
   private readonly raceController: RaceControlService;
@@ -44,6 +46,8 @@ export class PageField extends BaseComponent {
     );
     this.garageField = new GarageField();
     this.winnersField = new WinnersField();
+    this.finishLine = document.createElement('div');
+    this.finishLine.classList.add('page-field__finish-line');
 
     this.element.appendChild(this.gameTitle);
     this.buttonField.appendChild(this.garageButton.element);
@@ -51,6 +55,7 @@ export class PageField extends BaseComponent {
     this.element.appendChild(this.buttonField);
     this.element.appendChild(this.garageField.element);
     this.element.appendChild(this.winnersField.element);
+    this.element.appendChild(this.finishLine);
     this.garageDataHandler = new GarageDataService(this.garageField);
     this.raceController = new RaceControlService(this.garageField);
   }
