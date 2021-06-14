@@ -1,16 +1,23 @@
 import './track-section.scss';
 import { BaseComponent } from '../shared/base-component';
-import { PlugField } from '../plug-field/plug-field';
 import { CarDataInterface } from '../shared/interfaces';
+import { CarControlPanel } from '../car-control-panel/car-control-panel';
+import { TrackLine } from '../track-line/track-line';
 
 export class TrackSection extends BaseComponent {
-  private readonly plugField: PlugField;
+  private readonly trackId: number;
+
+  private readonly carControlPanel: CarControlPanel;
+
+  private readonly trackLine: TrackLine;
 
   constructor(car: CarDataInterface) {
     super('div', ['track-section']);
-    this.plugField = new PlugField();
-    this.element.appendChild(this.plugField.element);
-    console.log('remove this plug flag');
+    this.trackId = car.id;
+    this.carControlPanel = new CarControlPanel(car.name);
+    this.trackLine = new TrackLine(car.color);
+    this.element.appendChild(this.carControlPanel.element);
+    this.element.appendChild(this.trackLine.element);
   }
 
   plugMethod(): void {

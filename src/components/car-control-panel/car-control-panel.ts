@@ -10,7 +10,7 @@ export class CarControlPanel extends BaseComponent {
 
   private readonly generateCarsButton: Button;
 
-  constructor() {
+  constructor(carName: string) {
     super('div', ['car-control-panel']);
     this.startRaceButton = new Button(
       [BUTTONS.startRace.className],
