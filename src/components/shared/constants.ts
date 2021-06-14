@@ -95,4 +95,9 @@ export const TEXT_TEMPLATES = {
     parameterFields: ['_pageNumber_'],
     className: 'txt_text-title',
   },
+  gameTitle: {
+    text: 'Async RACE',
+    parameterFields: [],
+    className: 'page-field__game-title',
+  },
 };
