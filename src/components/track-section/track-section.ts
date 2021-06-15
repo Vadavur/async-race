@@ -15,7 +15,7 @@ export class TrackSection extends BaseComponent {
     super('div', ['track-section']);
     this.trackId = car.id;
     this.carControlPanel = new CarControlPanel(car.name);
-    this.trackLine = new TrackLine(car.color);
+    this.trackLine = new TrackLine(car.color, this.trackId);
     this.element.appendChild(this.carControlPanel.element);
     this.element.appendChild(this.trackLine.element);
   }
