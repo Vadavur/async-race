@@ -1,4 +1,4 @@
-import './button.scss';
+import './button-component.scss';
 import { BaseComponent } from '../base-component';
 
 export class ButtonComponent extends BaseComponent {

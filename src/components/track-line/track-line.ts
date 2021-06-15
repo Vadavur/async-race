@@ -1,14 +1,14 @@
 import './track-line.scss';
 import { BaseComponent } from '../shared/base-component';
-import { PlugField } from '../plug-field/plug-field';
+import { CarField } from '../car-field/car-field';
 
 export class TrackLine extends BaseComponent {
-  private readonly plugField: PlugField;
+  private readonly carField: CarField;
 
   constructor(carColor: string) {
     super('div', ['track-line']);
-    this.plugField = new PlugField();
-    this.element.appendChild(this.plugField.element);
+    this.carField = new CarField(carColor);
+    this.element.appendChild(this.carField.element);
     console.log('remove this plug flag');
   }
 

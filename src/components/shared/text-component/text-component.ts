@@ -1,4 +1,4 @@
-import './text.scss';
+import './text-component.scss';
 import { BaseComponent } from '../base-component';
 import { TextComponentTemplateInterface } from '../interfaces';
 
