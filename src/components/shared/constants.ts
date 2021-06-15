@@ -1,5 +1,12 @@
 export const AR_GAME = { title: 'Async RACE', name: 'async-race' };
 
+export const BASE_URL = 'http://localhost:3000';
+
+export const URL_PATHS = {
+  garage: 'garage',
+  winners: 'winners',
+};
+
 export const BUTTONS = {
   toGarage: {
     label: 'garage'.toUpperCase(),
@@ -107,9 +114,24 @@ export const TEXT_TEMPLATES = {
   },
 };
 
-export const TRACK_LINES_NUMBER = 7;
+export const TRACK_LINES_PAGE_LIMIT = {
+  queryParam: '_limit',
+  number: 7,
+};
+
+export const GARAGE_PAGE = {
+  queryParam: '_page',
+  totalCarsNumberHeader: 'X-Total-Count',
+  number: 1,
+};
 
 export const WINNERS_NUMBER = 10;
+
+export const SERVER_ERROR = {
+  messageFromServer: 'Failed to fetch',
+  messageToUser: 'Server is probably not running',
+  messageToUserClassList: 'server-error',
+};
 
 export const CAR_SVG_VECTOR = `    <svg
 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"

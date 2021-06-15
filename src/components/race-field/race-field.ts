@@ -3,34 +3,31 @@ import { BaseComponent } from '../shared/base-component';
 import { TextComponent } from '../shared/text-component/text-component';
 import { ButtonComponent } from '../shared/button-component/button-component';
 import { DataBaseService } from '../services/data-base-service';
-import { TEXT_TEMPLATES, BUTTONS } from '../shared/constants';
+import { TEXT_TEMPLATES, BUTTONS, SERVER_ERROR } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';
 import { TrackSection } from '../track-section/track-section';
 
 export class RaceField extends BaseComponent {
-  private carsNumber: number;
+  private carsNumber?: number;
 
   private currentPageNumber = 1;
 
-  private garageTitle: TextComponent;
+  private garageTitle?: TextComponent;
 
-  private pageTitle: TextComponent;
+  private pageTitle?: TextComponent;
 
   private readonly trackSections: TrackSection[] = [];
 
-  private readonly carsOnTrack: CarDataInterface[];
+  private carsOnTrack?: CarDataInterface[];
 
-  private readonly buttonField: HTMLDivElement;
+  private buttonField: HTMLDivElement;
 
-  readonly previousPageButton: ButtonComponent;
+  previousPageButton: ButtonComponent;
 
-  readonly nextPageButton: ButtonComponent;
+  nextPageButton: ButtonComponent;
 
   constructor() {
     super('div', ['race-field']);
-    this.carsNumber = DataBaseService.getCarsNumber();
-    this.garageTitle = this.setGarageTitle();
-    this.pageTitle = this.setPageTitle();
     this.buttonField = document.createElement('div');
     this.buttonField.classList.add('race-field__button-field');
 
@@ -42,20 +39,38 @@ export class RaceField extends BaseComponent {
       [BUTTONS.nextPage.className],
       BUTTONS.nextPage.label
     );
-
-    this.element.appendChild(this.garageTitle.element);
-    this.element.appendChild(this.pageTitle.element);
-    this.carsOnTrack = DataBaseService.getCarsOnPage(this.currentPageNumber);
-    this.setTrackSections();
     this.buttonField.appendChild(this.previousPageButton.element);
     this.buttonField.appendChild(this.nextPageButton.element);
-    this.element.appendChild(this.buttonField);
+
+    DataBaseService.getCarsOnPageData(this.currentPageNumber)
+      .then((result) => {
+        this.carsNumber = result.allCarsNumber;
+        console.log(result.allCarsNumber);
+        this.garageTitle = this.setGarageTitle();
+        this.pageTitle = this.setPageTitle();
+        this.element.appendChild(this.garageTitle.element);
+        this.element.appendChild(this.pageTitle.element);
+        this.carsOnTrack = result.carsOnPageData;
+        console.log(result.carsOnPageData);
+        this.setTrackSections();
+        this.element.appendChild(this.buttonField);
+      })
+      .catch((error) => {
+        if (error.message === SERVER_ERROR.messageFromServer) {
+          this.element.classList.add(SERVER_ERROR.messageToUserClassList);
+          this.element.innerHTML = SERVER_ERROR.messageToUser;
+        }
+      });
+  }
+
+  private async getCarsNumber(): Promise<void> {
+    this.carsNumber = await DataBaseService.getCarsNumber();
   }
 
   private setGarageTitle(): TextComponent {
     const garageTitleText = TextComponent.createTextFromTemplate(
       TEXT_TEMPLATES.garageTitle,
-      [this.carsNumber.toString()]
+      [`${this.carsNumber}`]
     );
     return new TextComponent(
       [TEXT_TEMPLATES.garageTitle.className],
@@ -75,7 +90,7 @@ export class RaceField extends BaseComponent {
   }
 
   private setTrackSections() {
-    this.carsOnTrack.forEach((car) => {
+    this.carsOnTrack?.forEach((car) => {
       const trackSection = new TrackSection(car);
       this.trackSections.push(trackSection);
       this.element.appendChild(trackSection.element);
