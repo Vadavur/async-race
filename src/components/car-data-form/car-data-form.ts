@@ -1,14 +1,14 @@
 import './car-data-form.scss';
 import { BaseComponent } from '../shared/base-component';
-import { Input } from '../shared/input/input';
-import { Button } from '../shared/button/button';
+import { InputComponent } from '../shared/input/input';
+import { ButtonComponent } from '../shared/button/button';
 
 export class CarDataForm extends BaseComponent {
-  private readonly carNameInput: Input;
+  private readonly carNameInput: InputComponent;
 
-  private readonly carColorInput: Input;
+  private readonly carColorInput: InputComponent;
 
-  private readonly submitButton: Button;
+  private readonly submitButton: ButtonComponent;
 
   constructor(
     carNameInputAttributes: { [attributeName: string]: string },
@@ -16,9 +16,12 @@ export class CarDataForm extends BaseComponent {
     buttonData: { label: string; className: string }
   ) {
     super('div', ['car-data-form']);
-    this.carNameInput = new Input(carNameInputAttributes);
-    this.carColorInput = new Input(carColorInputAttributes);
-    this.submitButton = new Button([buttonData.className], buttonData.label);
+    this.carNameInput = new InputComponent(carNameInputAttributes);
+    this.carColorInput = new InputComponent(carColorInputAttributes);
+    this.submitButton = new ButtonComponent(
+      [buttonData.className],
+      buttonData.label
+    );
     this.element.appendChild(this.carNameInput.element);
     this.element.appendChild(this.carColorInput.element);
     this.element.appendChild(this.submitButton.element);

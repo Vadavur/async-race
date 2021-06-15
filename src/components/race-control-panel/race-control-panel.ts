@@ -1,26 +1,26 @@
 import './race-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
-import { Button } from '../shared/button/button';
+import { ButtonComponent } from '../shared/button/button';
 import { BUTTONS } from '../shared/constants';
 
 export class RaceControlPanel extends BaseComponent {
-  private readonly startRaceButton: Button;
+  private readonly startRaceButton: ButtonComponent;
 
-  private readonly resetGarageButton: Button;
+  private readonly resetGarageButton: ButtonComponent;
 
-  private readonly generateCarsButton: Button;
+  private readonly generateCarsButton: ButtonComponent;
 
   constructor() {
     super('div', ['race-control-panel']);
-    this.startRaceButton = new Button(
+    this.startRaceButton = new ButtonComponent(
       [BUTTONS.startRace.className],
       BUTTONS.startRace.label
     );
-    this.resetGarageButton = new Button(
+    this.resetGarageButton = new ButtonComponent(
       [BUTTONS.resetGarage.className],
       BUTTONS.resetGarage.label
     );
-    this.generateCarsButton = new Button(
+    this.generateCarsButton = new ButtonComponent(
       [BUTTONS.generateCars.className],
       BUTTONS.generateCars.label
     );

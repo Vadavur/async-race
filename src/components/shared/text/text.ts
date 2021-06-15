@@ -1,15 +1,15 @@
 import './text.scss';
 import { BaseComponent } from '../base-component';
-import { TextTemplateInterface } from '../interfaces';
+import { TextComponentTemplateInterface } from '../interfaces';
 
-export class Text extends BaseComponent {
+export class TextComponent extends BaseComponent {
   constructor(styles: string[], textContent = '') {
     super('p', styles);
     this.element.innerText = textContent;
   }
 
   public static createTextFromTemplate(
-    textTemplate: TextTemplateInterface,
+    textTemplate: TextComponentTemplateInterface,
     parameters: string[]
   ): string {
     let createdText: string = textTemplate.text;

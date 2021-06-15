@@ -1,4 +1,4 @@
-export interface TextTemplateInterface {
+export interface TextComponentTemplateInterface {
   text: string;
   parameterFields: string[];
   className: string;

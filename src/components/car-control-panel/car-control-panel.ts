@@ -1,31 +1,45 @@
 import './car-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
-import { Button } from '../shared/button/button';
-import { BUTTONS } from '../shared/constants';
+import { ButtonComponent } from '../shared/button/button';
+import { BUTTONS, TEXT_TEMPLATES } from '../shared/constants';
+import { TextComponent } from '../shared/text/text';
 
 export class CarControlPanel extends BaseComponent {
-  private readonly startRaceButton: Button;
+  private readonly carName: TextComponent;
 
-  private readonly resetGarageButton: Button;
+  private readonly selectCarButton: ButtonComponent;
 
-  private readonly generateCarsButton: Button;
+  private readonly removeCarButton: ButtonComponent;
+
+  private readonly startTestButton: ButtonComponent;
+
+  private readonly stopTestButton: ButtonComponent;
 
   constructor(carName: string) {
     super('div', ['car-control-panel']);
-    this.startRaceButton = new Button(
-      [BUTTONS.startRace.className],
-      BUTTONS.startRace.label
+    this.carName = new TextComponent(
+      [TEXT_TEMPLATES.carName.className],
+      carName
     );
-    this.resetGarageButton = new Button(
-      [BUTTONS.resetGarage.className],
-      BUTTONS.resetGarage.label
+    this.selectCarButton = new ButtonComponent(
+      [BUTTONS.selectCar.className],
+      BUTTONS.selectCar.label
     );
-    this.generateCarsButton = new Button(
-      [BUTTONS.generateCars.className],
-      BUTTONS.generateCars.label
+    this.removeCarButton = new ButtonComponent(
+      [BUTTONS.removeCar.className],
+      BUTTONS.removeCar.label
     );
-    this.element.appendChild(this.startRaceButton.element);
-    this.element.appendChild(this.resetGarageButton.element);
-    this.element.appendChild(this.generateCarsButton.element);
+    this.startTestButton = new ButtonComponent(
+      [BUTTONS.startCarTest.className],
+      BUTTONS.startCarTest.label
+    );
+    this.stopTestButton = new ButtonComponent(
+      [BUTTONS.stopCarTest.className],
+      BUTTONS.stopCarTest.label
+    );
+    this.element.appendChild(this.selectCarButton.element);
+    this.element.appendChild(this.removeCarButton.element);
+    this.element.appendChild(this.startTestButton.element);
+    this.element.appendChild(this.stopTestButton.element);
   }
 }

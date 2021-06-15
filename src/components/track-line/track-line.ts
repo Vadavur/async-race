@@ -13,6 +13,6 @@ export class TrackLine extends BaseComponent {
   }
 
   plugMethod(): void {
-    console.log(this.element, 'remove this plug flag');
+    console.log(this.element.toString(), 'remove this plug flag');
   }
 }

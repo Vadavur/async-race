@@ -2,7 +2,7 @@ import './page-field.scss';
 import { BaseComponent } from '../shared/base-component';
 import { GarageField } from '../garage-field/garage-field';
 import { WinnersField } from '../winners-field/winners-field';
-import { Button } from '../shared/button/button';
+import { ButtonComponent } from '../shared/button/button';
 import { BUTTONS, TEXT_TEMPLATES } from '../shared/constants';
 import { GarageDataService } from '../services/garage-data-service';
 import { RaceControlService } from '../services/race-control-service';
@@ -12,9 +12,9 @@ export class PageField extends BaseComponent {
 
   private readonly buttonField: HTMLDivElement;
 
-  readonly garageButton: Button;
+  readonly garageButton: ButtonComponent;
 
-  readonly winnersButton: Button;
+  readonly winnersButton: ButtonComponent;
 
   readonly garageField: GarageField;
 
@@ -36,11 +36,11 @@ export class PageField extends BaseComponent {
     this.buttonField = document.createElement('div');
     this.buttonField.classList.add('page-field__button-field');
 
-    this.garageButton = new Button(
+    this.garageButton = new ButtonComponent(
       [BUTTONS.toGarage.className],
       BUTTONS.toGarage.label
     );
-    this.winnersButton = new Button(
+    this.winnersButton = new ButtonComponent(
       [BUTTONS.toWinners.className],
       BUTTONS.toWinners.label
     );

@@ -6,7 +6,7 @@ export class DataBaseService {
     return 10;
   }
 
-  public static getCarsOnPage(pageNUmber: number): CarDataInterface[] {
+  public static getCarsOnPage(pageNumber: number): CarDataInterface[] {
     return [
       { name: 'AAAAA', color: '#abc123', id: 1 },
       { name: 'BBBBB', color: '#123abc', id: 2 },

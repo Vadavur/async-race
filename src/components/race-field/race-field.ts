@@ -1,7 +1,7 @@
 import './race-field.scss';
 import { BaseComponent } from '../shared/base-component';
-import { Text } from '../shared/text/text';
-import { Button } from '../shared/button/button';
+import { TextComponent } from '../shared/text/text';
+import { ButtonComponent } from '../shared/button/button';
 import { DataBaseService } from '../services/data-base-service';
 import { TEXT_TEMPLATES, BUTTONS } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';
@@ -12,9 +12,9 @@ export class RaceField extends BaseComponent {
 
   private currentPageNumber = 1;
 
-  private garageTitle: Text;
+  private garageTitle: TextComponent;
 
-  private pageTitle: Text;
+  private pageTitle: TextComponent;
 
   private readonly trackSections: TrackSection[] = [];
 
@@ -22,9 +22,9 @@ export class RaceField extends BaseComponent {
 
   private readonly buttonField: HTMLDivElement;
 
-  readonly previousPageButton: Button;
+  readonly previousPageButton: ButtonComponent;
 
-  readonly nextPageButton: Button;
+  readonly nextPageButton: ButtonComponent;
 
   constructor() {
     super('div', ['race-field']);
@@ -34,11 +34,11 @@ export class RaceField extends BaseComponent {
     this.buttonField = document.createElement('div');
     this.buttonField.classList.add('race-field__button-field');
 
-    this.previousPageButton = new Button(
+    this.previousPageButton = new ButtonComponent(
       [BUTTONS.previousPage.className],
       BUTTONS.previousPage.label
     );
-    this.nextPageButton = new Button(
+    this.nextPageButton = new ButtonComponent(
       [BUTTONS.nextPage.className],
       BUTTONS.nextPage.label
     );
@@ -52,20 +52,26 @@ export class RaceField extends BaseComponent {
     this.element.appendChild(this.buttonField);
   }
 
-  private setGarageTitle(): Text {
-    const garageTitleText = Text.createTextFromTemplate(
+  private setGarageTitle(): TextComponent {
+    const garageTitleText = TextComponent.createTextFromTemplate(
       TEXT_TEMPLATES.garageTitle,
       [this.carsNumber.toString()]
     );
-    return new Text([TEXT_TEMPLATES.garageTitle.className], garageTitleText);
+    return new TextComponent(
+      [TEXT_TEMPLATES.garageTitle.className],
+      garageTitleText
+    );
   }
 
-  private setPageTitle(): Text {
-    const pageTitleText = Text.createTextFromTemplate(
+  private setPageTitle(): TextComponent {
+    const pageTitleText = TextComponent.createTextFromTemplate(
       TEXT_TEMPLATES.pageTitle,
       [this.currentPageNumber.toString()]
     );
-    return new Text([TEXT_TEMPLATES.pageTitle.className], pageTitleText);
+    return new TextComponent(
+      [TEXT_TEMPLATES.pageTitle.className],
+      pageTitleText
+    );
   }
 
   private setTrackSections() {
