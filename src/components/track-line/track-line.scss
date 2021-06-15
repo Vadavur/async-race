@@ -8,8 +8,9 @@
   z-index: -2;
 }
 
-.track-line:before,
-.track-line:after {
+.track-line::before,
+.track-line::after {
+  content: "";
   width: 100%;
   height: 100%;
   position: absolute;
@@ -19,10 +20,10 @@
   opacity: 0.6;
 }
 
-.track-line:before {
+.track-line::before {
   background-position-y: bottom;
 }
 
-.track-line:after {
+.track-line::after {
   background-position-y: top;
 }
