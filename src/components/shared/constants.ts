@@ -103,7 +103,7 @@ export const TEXT_TEMPLATES = {
   carName: {
     text: '_carName_',
     parameterFields: ['_carName_'],
-    className: 'car-name',
+    className: 'txt_car-name',
   },
 };
 

@@ -37,6 +37,7 @@ export class CarControlPanel extends BaseComponent {
       [BUTTONS.stopCarTest.className],
       BUTTONS.stopCarTest.label
     );
+    this.element.appendChild(this.carName.element);
     this.element.appendChild(this.selectCarButton.element);
     this.element.appendChild(this.removeCarButton.element);
     this.element.appendChild(this.startTestButton.element);
