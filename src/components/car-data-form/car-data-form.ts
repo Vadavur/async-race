@@ -1,7 +1,7 @@
 import './car-data-form.scss';
 import { BaseComponent } from '../shared/base-component';
-import { InputComponent } from '../shared/input/input';
-import { ButtonComponent } from '../shared/button/button';
+import { InputComponent } from '../shared/input-component/input-component';
+import { ButtonComponent } from '../shared/button-component/button-component';
 
 export class CarDataForm extends BaseComponent {
   private readonly carNameInput: InputComponent;

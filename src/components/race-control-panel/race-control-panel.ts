@@ -1,6 +1,6 @@
 import './race-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
-import { ButtonComponent } from '../shared/button/button';
+import { ButtonComponent } from '../shared/button-component/button-component';
 import { BUTTONS } from '../shared/constants';
 
 export class RaceControlPanel extends BaseComponent {

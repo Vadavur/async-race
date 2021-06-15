@@ -1,7 +1,7 @@
 import './race-field.scss';
 import { BaseComponent } from '../shared/base-component';
-import { TextComponent } from '../shared/text/text';
-import { ButtonComponent } from '../shared/button/button';
+import { TextComponent } from '../shared/text-component/text-component';
+import { ButtonComponent } from '../shared/button-component/button-component';
 import { DataBaseService } from '../services/data-base-service';
 import { TEXT_TEMPLATES, BUTTONS } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';

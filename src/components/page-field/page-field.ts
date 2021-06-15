@@ -2,7 +2,7 @@ import './page-field.scss';
 import { BaseComponent } from '../shared/base-component';
 import { GarageField } from '../garage-field/garage-field';
 import { WinnersField } from '../winners-field/winners-field';
-import { ButtonComponent } from '../shared/button/button';
+import { ButtonComponent } from '../shared/button-component/button-component';
 import { BUTTONS, TEXT_TEMPLATES } from '../shared/constants';
 import { GarageDataService } from '../services/garage-data-service';
 import { RaceControlService } from '../services/race-control-service';

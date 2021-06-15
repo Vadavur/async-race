@@ -1,8 +1,8 @@
 import './car-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
-import { ButtonComponent } from '../shared/button/button';
+import { ButtonComponent } from '../shared/button-component/button-component';
 import { BUTTONS, TEXT_TEMPLATES } from '../shared/constants';
-import { TextComponent } from '../shared/text/text';
+import { TextComponent } from '../shared/text-component/text-component';
 
 export class CarControlPanel extends BaseComponent {
   private readonly carName: TextComponent;
