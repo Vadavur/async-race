@@ -19,3 +19,8 @@ export interface CarsOnPageDataInterface {
   carsOnPageData: CarDataInterface[];
   allCarsNumber: number;
 }
+
+export interface WinnersOnPageDataInterface {
+  winnersOnPageData: CarDataInterface[];
+  allWinnersNumber: number;
+}

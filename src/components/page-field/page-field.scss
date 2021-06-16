@@ -16,7 +16,17 @@
 }
 
 .page-field__game-title {
+  width: 23rem;
+  font-style: italic;
+  font-weight: 800;
   font-size: 4rem;
+  background: -webkit-linear-gradient(to right, #cf9d12 20%, #cf1512 94%);
+  background: -moz-linear-gradient(to right, #cf9d12 20%, #cf1512 94%);
+  background: linear-gradient(to right, #cf9d12 20%, #cf1512 94%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.7;
 }
 
 .page-field__finish-line {
