@@ -4,12 +4,10 @@ import {
   GARAGE_PAGE,
   TRACK_LINES_PAGE_LIMIT,
 } from '../shared/constants';
-import { CarDataInterface } from '../shared/interfaces';
-
-interface CarsOnPageDataInterface {
-  carsOnPageData: CarDataInterface[];
-  allCarsNumber: number;
-}
+import {
+  CarDataInterface,
+  CarsOnPageDataInterface,
+} from '../shared/interfaces';
 
 export class CarsDataService extends DataBaseService {
   public static async getCarsOnPageData(

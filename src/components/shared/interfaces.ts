@@ -9,3 +9,13 @@ export interface CarDataInterface {
   color: string;
   id: number;
 }
+
+export interface RaceData {
+  velocity: number;
+  distance: number;
+}
+
+export interface CarsOnPageDataInterface {
+  carsOnPageData: CarDataInterface[];
+  allCarsNumber: number;
+}
