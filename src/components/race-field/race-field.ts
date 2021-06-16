@@ -2,7 +2,7 @@ import './race-field.scss';
 import { BaseComponent } from '../shared/base-component';
 import { TextComponent } from '../shared/text-component/text-component';
 import { ButtonComponent } from '../shared/button-component/button-component';
-import { DataBaseService } from '../services/data-base-service';
+import { CarsDataService } from '../services/cars-data-service';
 import { TEXT_TEMPLATES, BUTTONS, SERVER_ERROR } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';
 import { TrackSection } from '../track-section/track-section';
@@ -42,16 +42,14 @@ export class RaceField extends BaseComponent {
     this.buttonField.appendChild(this.previousPageButton.element);
     this.buttonField.appendChild(this.nextPageButton.element);
 
-    DataBaseService.getCarsOnPageData(this.currentPageNumber)
+    CarsDataService.getCarsOnPageData(this.currentPageNumber)
       .then((result) => {
         this.carsNumber = result.allCarsNumber;
-        console.log(result.allCarsNumber);
         this.garageTitle = this.setGarageTitle();
         this.pageTitle = this.setPageTitle();
         this.element.appendChild(this.garageTitle.element);
         this.element.appendChild(this.pageTitle.element);
         this.carsOnTrack = result.carsOnPageData;
-        console.log(result.carsOnPageData);
         this.setTrackSections();
         this.element.appendChild(this.buttonField);
       })
@@ -61,10 +59,6 @@ export class RaceField extends BaseComponent {
           this.element.innerHTML = SERVER_ERROR.messageToUser;
         }
       });
-  }
-
-  private async getCarsNumber(): Promise<void> {
-    this.carsNumber = await DataBaseService.getCarsNumber();
   }
 
   private setGarageTitle(): TextComponent {
