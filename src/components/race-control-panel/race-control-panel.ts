@@ -4,11 +4,11 @@ import { ButtonComponent } from '../shared/button-component/button-component';
 import { BUTTONS } from '../shared/constants';
 
 export class RaceControlPanel extends BaseComponent {
-  private readonly startRaceButton: ButtonComponent;
+  readonly startRaceButton: ButtonComponent;
 
-  private readonly resetGarageButton: ButtonComponent;
+  readonly resetRaceButton: ButtonComponent;
 
-  private readonly generateCarsButton: ButtonComponent;
+  readonly generateCarsButton: ButtonComponent;
 
   constructor() {
     super('div', ['race-control-panel']);
@@ -16,7 +16,7 @@ export class RaceControlPanel extends BaseComponent {
       [BUTTONS.startRace.className],
       BUTTONS.startRace.label
     );
-    this.resetGarageButton = new ButtonComponent(
+    this.resetRaceButton = new ButtonComponent(
       [BUTTONS.resetGarage.className],
       BUTTONS.resetGarage.label
     );
@@ -25,7 +25,7 @@ export class RaceControlPanel extends BaseComponent {
       BUTTONS.generateCars.label
     );
     this.element.appendChild(this.startRaceButton.element);
-    this.element.appendChild(this.resetGarageButton.element);
+    this.element.appendChild(this.resetRaceButton.element);
     this.element.appendChild(this.generateCarsButton.element);
   }
 }

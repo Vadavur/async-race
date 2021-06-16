@@ -134,6 +134,13 @@ export const SERVER_ERROR = {
   messageToUserClassList: 'server-error',
 };
 
+export const ENGINE_WRECKED_ELEMENT_CLASS = 'car-field_engine-wrecked';
+
+export const REQUEST_PARAMS = {
+  engineStarted: { name: 'status', value: 'started' },
+  engineStopped: { name: 'status', value: 'stopped' },
+};
+
 export const CAR_SVG_VECTOR = `    <svg
 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"

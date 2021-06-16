@@ -4,6 +4,7 @@ $basicFont: "Roboto", sans-serif;
 body {
   background-color: $bodyColor;
   position: relative;
+  overflow-x: hidden;
 }
 
 * {

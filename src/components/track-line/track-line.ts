@@ -3,7 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { CarField } from '../car-field/car-field';
 
 export class TrackLine extends BaseComponent {
-  private readonly carField: CarField;
+  readonly carField: CarField;
 
   constructor(carColor: string, carId: number) {
     super('div', ['track-line']);

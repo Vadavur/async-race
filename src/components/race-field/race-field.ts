@@ -16,11 +16,11 @@ export class RaceField extends BaseComponent {
 
   private pageTitle?: TextComponent;
 
-  private readonly trackSections: TrackSection[] = [];
+  readonly trackSections: TrackSection[] = [];
 
   private carsOnTrack?: CarDataInterface[];
 
-  private buttonField: HTMLDivElement;
+  buttonField: HTMLDivElement;
 
   previousPageButton: ButtonComponent;
 

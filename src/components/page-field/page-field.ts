@@ -5,7 +5,6 @@ import { WinnersField } from '../winners-field/winners-field';
 import { ButtonComponent } from '../shared/button-component/button-component';
 import { BUTTONS, TEXT_TEMPLATES } from '../shared/constants';
 import { GarageViewService } from '../services/garage-view-service';
-import { RaceControlService } from '../services/race-control-service';
 
 export class PageField extends BaseComponent {
   private readonly gameTitle: HTMLElement;
@@ -23,8 +22,6 @@ export class PageField extends BaseComponent {
   readonly finishLine: HTMLDivElement;
 
   // private readonly garageDataHandler: GarageViewService;
-
-  private readonly raceController: RaceControlService;
 
   constructor() {
     super('div', ['page-field']);
@@ -57,6 +54,5 @@ export class PageField extends BaseComponent {
     this.element.appendChild(this.winnersField.element);
     this.element.appendChild(this.finishLine);
     // this.garageDataHandler = new GarageViewService(this.garageField);
-    this.raceController = new RaceControlService(this.garageField);
   }
 }

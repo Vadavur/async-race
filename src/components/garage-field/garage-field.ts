@@ -7,13 +7,13 @@ import { BUTTONS, INPUTS_ATTRIBUTES } from '../shared/constants';
 import { GarageViewService } from '../services/garage-view-service';
 
 export class GarageField extends BaseComponent {
-  private readonly createCarForm: CarDataForm;
+  readonly createCarForm: CarDataForm;
 
-  private readonly updateCarForm: CarDataForm;
+  readonly updateCarForm: CarDataForm;
 
-  private readonly raceControlPanel: RaceControlPanel;
+  readonly raceControlPanel: RaceControlPanel;
 
-  private readonly raceField: RaceField;
+  readonly raceField: RaceField;
 
   private readonly garageViewer: GarageViewService;
 

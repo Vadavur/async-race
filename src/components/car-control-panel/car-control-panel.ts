@@ -7,13 +7,13 @@ import { TextComponent } from '../shared/text-component/text-component';
 export class CarControlPanel extends BaseComponent {
   private readonly carName: TextComponent;
 
-  private readonly selectCarButton: ButtonComponent;
+  readonly selectCarButton: ButtonComponent;
 
-  private readonly removeCarButton: ButtonComponent;
+  readonly removeCarButton: ButtonComponent;
 
-  private readonly startTestButton: ButtonComponent;
+  readonly startTestButton: ButtonComponent;
 
-  private readonly stopTestButton: ButtonComponent;
+  readonly stopTestButton: ButtonComponent;
 
   constructor(carName: string) {
     super('div', ['car-control-panel']);

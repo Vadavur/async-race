@@ -3,9 +3,11 @@ import { URL_PATHS } from '../shared/constants';
 import { RaceData } from '../shared/interfaces';
 
 export class EngineDataService extends DataBaseService {
-  public static async getRaceData(id: number): Promise<RaceData> {
+  public static async setEngineMode(
+    id: number,
+    engineStartRequestParam: { name: string; value: string }
+  ): Promise<RaceData> {
     const engineIdRequestParamName = 'id';
-    const engineStartRequestParam = { name: 'status', value: 'started' };
     const request = this.createUrlRequest(URL_PATHS.engine, [
       [engineIdRequestParamName, `${id}`],
       [engineStartRequestParam.name, engineStartRequestParam.value],
