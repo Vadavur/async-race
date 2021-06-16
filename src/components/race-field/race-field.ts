@@ -3,6 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { TextComponent } from '../shared/text-component/text-component';
 import { ButtonComponent } from '../shared/button-component/button-component';
 import { CarsDataService } from '../services/cars-data-service';
+import { RaceControlService } from '../services/race-control-service';
 import { TEXT_TEMPLATES, BUTTONS, SERVER_ERROR } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';
 import { TrackSection } from '../track-section/track-section';
@@ -84,8 +85,20 @@ export class RaceField extends BaseComponent {
   }
 
   private setTrackSections() {
+    RaceControlService.raceControlHandlers = [];
     this.carsOnTrack?.forEach((car) => {
       const trackSection = new TrackSection(car);
+      RaceControlService.raceControlHandlers.push(
+        new RaceControlService(
+          trackSection.trackLine.carField.element,
+          trackSection.trackLine.element,
+          trackSection.carControlPanel.startTestButton
+            .element as HTMLButtonElement,
+          trackSection.carControlPanel.stopTestButton
+            .element as HTMLButtonElement,
+          trackSection.trackId
+        )
+      );
       this.trackSections.push(trackSection);
       this.element.appendChild(trackSection.element);
     });

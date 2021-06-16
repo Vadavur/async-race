@@ -5,7 +5,7 @@ import {
 import { EngineDataService } from './engine-data-service';
 
 export class RaceControlService {
-  static RaceControlHandlers: RaceControlService[] = [];
+  static raceControlHandlers: RaceControlService[] = [];
 
   static startRaceButton: HTMLButtonElement;
 
@@ -56,14 +56,14 @@ export class RaceControlService {
   }
 
   public static startRace(): void {
-    this.RaceControlHandlers.forEach((handler) => {
+    this.raceControlHandlers.forEach((handler) => {
       handler.startTestButton.setAttribute('disabled', '');
       handler.runEngine();
     });
   }
 
   public static resetRace(): void {
-    this.RaceControlHandlers.forEach((handler) => {
+    this.raceControlHandlers.forEach((handler) => {
       handler.startTestButton.removeAttribute('disabled');
       handler.stopTest();
     });
@@ -121,6 +121,7 @@ export class RaceControlService {
         window.cancelAnimationFrame(this.requestId);
       }
       this.carElement.classList.add(ENGINE_WRECKED_ELEMENT_CLASS);
+      this.stopEngine();
     });
   }
 
