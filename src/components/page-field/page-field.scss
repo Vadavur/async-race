@@ -1,12 +1,8 @@
 .page-field {
   width: 100%;
-  min-height: 100%;
-  position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-image: url("/public/asphalt.jpg");
-  background-position: center;
-  background-size: 40rem;
 }
 
 .page-field__button-field {

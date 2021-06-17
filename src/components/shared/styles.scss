@@ -5,6 +5,9 @@ body {
   background-color: $bodyColor;
   position: relative;
   overflow-x: hidden;
+  background-image: url("/public/asphalt.jpg");
+  background-position: center;
+  background-size: 40rem;
 }
 
 * {
