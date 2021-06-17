@@ -1,10 +1,9 @@
 import './race-field.scss';
 import { BaseComponent } from '../shared/base-component';
 import { TextComponent } from '../shared/text-component/text-component';
-import { ButtonComponent } from '../shared/button-component/button-component';
 import { CarsDataService } from '../services/cars-data-service';
 import { RaceControlService } from '../services/race-control-service';
-import { TEXT_TEMPLATES, BUTTONS, SERVER_ERROR } from '../shared/constants';
+import { TEXT_TEMPLATES, SERVER_ERROR } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';
 import { TrackSection } from '../track-section/track-section';
 
@@ -21,28 +20,9 @@ export class RaceField extends BaseComponent {
 
   private carsOnTrack?: CarDataInterface[];
 
-  buttonField: HTMLDivElement;
-
-  previousPageButton: ButtonComponent;
-
-  nextPageButton: ButtonComponent;
-
   constructor(currentPageNumber: number) {
     super('div', ['race-field']);
     this.currentPageNumber = currentPageNumber;
-    this.buttonField = document.createElement('div');
-    this.buttonField.classList.add('race-field__button-field');
-
-    this.previousPageButton = new ButtonComponent(
-      [BUTTONS.previousPage.className],
-      BUTTONS.previousPage.label
-    );
-    this.nextPageButton = new ButtonComponent(
-      [BUTTONS.nextPage.className],
-      BUTTONS.nextPage.label
-    );
-    this.buttonField.appendChild(this.previousPageButton.element);
-    this.buttonField.appendChild(this.nextPageButton.element);
 
     CarsDataService.getCarsOnPageData(this.currentPageNumber)
       .then((result) => {
@@ -53,7 +33,6 @@ export class RaceField extends BaseComponent {
         this.element.appendChild(this.pageTitle.element);
         this.carsOnTrack = result.carsOnPageData;
         this.setTrackSections();
-        this.element.appendChild(this.buttonField);
       })
       .catch((error) => {
         if (error.message === SERVER_ERROR.messageFromServer) {

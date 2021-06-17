@@ -5,6 +5,7 @@ import {
   INITIAL_PAGE_NUMBER,
 } from '../shared/constants';
 import { BaseComponent } from '../shared/base-component';
+import { ButtonComponent } from '../shared/button-component/button-component';
 import { CarDataForm } from '../car-data-form/car-data-form';
 import { RaceControlPanel } from '../race-control-panel/race-control-panel';
 import { RaceField } from '../race-field/race-field';
@@ -17,12 +18,31 @@ export class GarageField extends BaseComponent {
 
   readonly raceControlPanel: RaceControlPanel;
 
-  readonly currentPageNumber: number;
+  currentPageNumber: number;
 
   raceField: RaceField;
 
+  buttonField: HTMLDivElement;
+
+  previousPageButton: ButtonComponent;
+
+  nextPageButton: ButtonComponent;
+
   constructor() {
     super('div', ['garage-field']);
+    this.buttonField = document.createElement('div');
+    this.buttonField.classList.add('garage-field__button-field');
+
+    this.previousPageButton = new ButtonComponent(
+      [BUTTONS.previousPage.className],
+      BUTTONS.previousPage.label
+    );
+    this.nextPageButton = new ButtonComponent(
+      [BUTTONS.nextPage.className],
+      BUTTONS.nextPage.label
+    );
+    this.buttonField.appendChild(this.previousPageButton.element);
+    this.buttonField.appendChild(this.nextPageButton.element);
 
     this.currentPageNumber = INITIAL_PAGE_NUMBER;
 
@@ -56,12 +76,16 @@ export class GarageField extends BaseComponent {
     this.element.appendChild(this.updateCarForm.element);
     this.element.appendChild(this.raceControlPanel.element);
     this.element.appendChild(this.raceField.element);
+    this.element.appendChild(this.buttonField);
   }
 
   public refreshRaceField(): void {
-    const garageFieldElements = this.element.childNodes;
-    garageFieldElements[garageFieldElements.length - 1].remove();
+    this.raceField.element.remove();
     this.raceField = new RaceField(this.currentPageNumber);
-    this.element.appendChild(this.raceField.element);
+    this.element.insertBefore(this.raceField.element, this.buttonField);
+    // const garageFieldElements = this.element.childNodes;
+    // garageFieldElements[garageFieldElements.length - 1].remove();
+    // this.raceField = new RaceField(this.currentPageNumber);
+    // this.element.appendChild(this.raceField.element);
   }
 }

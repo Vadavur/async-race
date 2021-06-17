@@ -12,6 +12,7 @@ export class ViewService {
     this.pageField.winnersButton.element.addEventListener('click', () => {
       this.showWinnersField();
     });
+    this.setCarPaginationButtons();
 
     document.addEventListener(CUSTOM_EVENTS.refreshPage, () => {
       this.refreshPage();
@@ -23,12 +24,29 @@ export class ViewService {
     this.pageField.garageField.element.style.display = 'block';
   }
 
-  showWinnersField(): void {
+  private showWinnersField(): void {
     this.pageField.garageField.element.style.display = 'none';
     this.pageField.winnersField.element.style.display = 'block';
   }
 
-  refreshPage(): void {
+  private setCarPaginationButtons(): void {
+    this.pageField.garageField.previousPageButton.element.addEventListener(
+      'click',
+      () => {
+        this.pageField.garageField.currentPageNumber--;
+        this.refreshPage();
+      }
+    );
+    this.pageField.garageField.nextPageButton.element.addEventListener(
+      'click',
+      () => {
+        this.pageField.garageField.currentPageNumber++;
+        this.refreshPage();
+      }
+    );
+  }
+
+  private refreshPage(): void {
     this.pageField.garageField.refreshRaceField();
   }
 }
