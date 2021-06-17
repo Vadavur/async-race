@@ -167,3 +167,10 @@ export const REQUEST_PARAMS = {
   engineStarted: { name: 'status', value: 'started' },
   engineStopped: { name: 'status', value: 'stopped' },
 };
+
+export const CAR_ENGINE_STATUS_PARAMETER_NAME = 'status';
+
+export const CAR_ENGINE_STATUS = {
+  engineStarted: 'started',
+  engineStopped: 'stopped',
+};

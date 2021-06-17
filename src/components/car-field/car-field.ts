@@ -1,8 +1,10 @@
 import './car-field.scss';
 import { BaseComponent } from '../shared/base-component';
-import { INLINE_SVG_IDS } from '../shared/constants';
+import { INLINE_SVG_IDS, CAR_ENGINE_STATUS } from '../shared/constants';
 
 export class CarField extends BaseComponent {
+  engineStatus = CAR_ENGINE_STATUS.engineStopped;
+
   constructor(carColor: string, carId: number) {
     super('div', ['car-field']);
     fetch('/public/car.svg')
