@@ -66,10 +66,17 @@ export const BUTTONS = {
 export const CUSTOM_EVENTS = {
   refreshPage: 'refreshPage',
 };
+export const WINNERS_NUMBER = 10;
+
+export const RANDOM_CARS_NUMBER = 100;
 
 export const INITIAL_PAGE_NUMBER = 1;
 
 export const END_RACE_MESSAGE = 'Race is over';
+
+export const RANDOM_COLOR_MULTIPLIER = 16777215;
+
+export const RANDOM_COLOR_NUMERIC_BASE = 16;
 
 export const DEFAULT_CAR_COLOR = '#000000';
 
@@ -133,8 +140,6 @@ export const GARAGE_PAGE = {
   totalCarsNumberHeader: 'X-Total-Count',
   number: 1,
 };
-
-export const WINNERS_NUMBER = 10;
 
 export const SERVER_ERROR = {
   messageFromServer: 'Failed to fetch',

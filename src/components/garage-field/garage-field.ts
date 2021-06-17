@@ -49,6 +49,9 @@ export class GarageField extends BaseComponent {
       this.updateCarForm.carNameInput.element as HTMLInputElement,
       this.updateCarForm.carColorInput.element as HTMLInputElement
     );
+    DataControlService.setСreateRandomCarsButton(
+      this.raceControlPanel.generateCarsButton.element as HTMLButtonElement
+    );
     this.element.appendChild(this.createCarForm.element);
     this.element.appendChild(this.updateCarForm.element);
     this.element.appendChild(this.raceControlPanel.element);
