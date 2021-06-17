@@ -35,7 +35,6 @@ export class GarageField extends BaseComponent {
     this.raceField = new RaceField();
     this.garageViewer = new GarageViewService(this.raceField);
     this.garageViewer.generateRaceField();
-    this.disableUpdateField();
 
     DataControlService.setCarCreateButton(
       this.createCarForm.submitButton.element as HTMLButtonElement,
@@ -51,11 +50,5 @@ export class GarageField extends BaseComponent {
     this.element.appendChild(this.updateCarForm.element);
     this.element.appendChild(this.raceControlPanel.element);
     this.element.appendChild(this.raceField.element);
-  }
-
-  private disableUpdateField(): void {
-    this.updateCarForm.carNameInput.element.setAttribute('disabled', '');
-    this.updateCarForm.carColorInput.element.setAttribute('disabled', '');
-    this.updateCarForm.submitButton.element.setAttribute('disabled', '');
   }
 }

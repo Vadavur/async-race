@@ -57,6 +57,9 @@ export class DataControlService {
     this.updateCarButton = updateCarButton;
     this.updateCarNameInput = updateCarNameInput;
     this.updateCarColorInput = updateCarColorInput;
+    DataControlService.updateCarButton.setAttribute('disabled', '');
+    DataControlService.updateCarNameInput.setAttribute('disabled', '');
+    DataControlService.updateCarColorInput.setAttribute('disabled', '');
     this.updateCarButton.addEventListener('click', () => {
       this.updateCar(this.selectedCarId);
     });
@@ -78,6 +81,9 @@ export class DataControlService {
     };
     this.refreshGarageField();
     CarsDataService.updateCar(carId, JSON.stringify(dataParams));
+    DataControlService.updateCarButton.setAttribute('disabled', '');
+    DataControlService.updateCarNameInput.setAttribute('disabled', '');
+    DataControlService.updateCarColorInput.setAttribute('disabled', '');
   }
 
   public static refreshGarageField(): void {}
