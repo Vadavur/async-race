@@ -72,6 +72,7 @@ export class RaceControlService {
   public setTestControlButtons(): void {
     this.startTestButton.addEventListener('click', () => {
       this.startTestButton.setAttribute('disabled', '');
+      this.carElement.classList.remove(ENGINE_WRECKED_ELEMENT_CLASS);
       this.runEngine();
     });
     this.stopTestButton.addEventListener('click', () => {
@@ -81,6 +82,7 @@ export class RaceControlService {
   }
 
   private runEngine(): void {
+    this.carElement.classList.remove(ENGINE_WRECKED_ELEMENT_CLASS);
     EngineDataService.setEngineMode(
       this.carId,
       REQUEST_PARAMS.engineStarted

@@ -4,11 +4,11 @@ import { InputComponent } from '../shared/input-component/input-component';
 import { ButtonComponent } from '../shared/button-component/button-component';
 
 export class CarDataForm extends BaseComponent {
-  private readonly carNameInput: InputComponent;
+  readonly carNameInput: InputComponent;
 
-  private readonly carColorInput: InputComponent;
+  readonly carColorInput: InputComponent;
 
-  private readonly submitButton: ButtonComponent;
+  readonly submitButton: ButtonComponent;
 
   constructor(
     carNameInputAttributes: { [attributeName: string]: string },

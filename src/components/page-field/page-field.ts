@@ -1,9 +1,9 @@
 import './page-field.scss';
+import { BUTTONS, TEXT_TEMPLATES } from '../shared/constants';
 import { BaseComponent } from '../shared/base-component';
+import { ButtonComponent } from '../shared/button-component/button-component';
 import { GarageField } from '../garage-field/garage-field';
 import { WinnersField } from '../winners-field/winners-field';
-import { ButtonComponent } from '../shared/button-component/button-component';
-import { BUTTONS, TEXT_TEMPLATES } from '../shared/constants';
 import { GarageViewService } from '../services/garage-view-service';
 
 export class PageField extends BaseComponent {
@@ -15,7 +15,7 @@ export class PageField extends BaseComponent {
 
   readonly winnersButton: ButtonComponent;
 
-  readonly garageField: GarageField;
+  garageField: GarageField;
 
   readonly winnersField: WinnersField;
 

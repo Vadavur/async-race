@@ -1,4 +1,4 @@
-import { DataBaseService } from '../shared/data-base-service';
+import { DataBaseService } from './data-base-service';
 import {
   URL_PATHS,
   GARAGE_PAGE,

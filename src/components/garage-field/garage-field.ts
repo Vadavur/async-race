@@ -1,10 +1,11 @@
 import './garage-field.scss';
+import { BUTTONS, INPUTS_ATTRIBUTES } from '../shared/constants';
 import { BaseComponent } from '../shared/base-component';
 import { CarDataForm } from '../car-data-form/car-data-form';
 import { RaceControlPanel } from '../race-control-panel/race-control-panel';
 import { RaceField } from '../race-field/race-field';
-import { BUTTONS, INPUTS_ATTRIBUTES } from '../shared/constants';
 import { GarageViewService } from '../services/garage-view-service';
+import { DataControlService } from '../services/data-control-service';
 
 export class GarageField extends BaseComponent {
   readonly createCarForm: CarDataForm;
@@ -34,9 +35,27 @@ export class GarageField extends BaseComponent {
     this.raceField = new RaceField();
     this.garageViewer = new GarageViewService(this.raceField);
     this.garageViewer.generateRaceField();
+    this.disableUpdateField();
+
+    DataControlService.setCarCreateButton(
+      this.createCarForm.submitButton.element as HTMLButtonElement,
+      this.createCarForm.carNameInput.element as HTMLInputElement,
+      this.createCarForm.carColorInput.element as HTMLInputElement
+    );
+    DataControlService.setCarUpdateButton(
+      this.updateCarForm.submitButton.element as HTMLButtonElement,
+      this.updateCarForm.carNameInput.element as HTMLInputElement,
+      this.updateCarForm.carColorInput.element as HTMLInputElement
+    );
     this.element.appendChild(this.createCarForm.element);
     this.element.appendChild(this.updateCarForm.element);
     this.element.appendChild(this.raceControlPanel.element);
     this.element.appendChild(this.raceField.element);
+  }
+
+  private disableUpdateField(): void {
+    this.updateCarForm.carNameInput.element.setAttribute('disabled', '');
+    this.updateCarForm.carColorInput.element.setAttribute('disabled', '');
+    this.updateCarForm.submitButton.element.setAttribute('disabled', '');
   }
 }

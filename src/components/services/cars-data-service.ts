@@ -1,13 +1,10 @@
-import { DataBaseService } from '../shared/data-base-service';
+import { DataBaseService } from './data-base-service';
 import {
   URL_PATHS,
   GARAGE_PAGE,
   TRACK_LINES_PAGE_LIMIT,
 } from '../shared/constants';
-import {
-  CarDataInterface,
-  CarsOnPageDataInterface,
-} from '../shared/interfaces';
+import { CarsOnPageDataInterface } from '../shared/interfaces';
 
 export class CarsDataService extends DataBaseService {
   public static async getCarsOnPageData(
@@ -47,13 +44,10 @@ export class CarsDataService extends DataBaseService {
     id: number,
     dataParams: BodyInit
   ): Promise<Response> {
-    const carUpdateRequestParam = 'id';
     const carUpdateHeader = {
       'Content-Type': 'application/json',
     };
-    const request = this.createUrlRequest(URL_PATHS.garage, [
-      [carUpdateRequestParam, `${id}`],
-    ]);
+    const request = this.createUrlRequest(`${URL_PATHS.garage}/${id}`, []);
     const response = await fetch(request, {
       method: 'PUT',
       body: dataParams,
@@ -63,19 +57,10 @@ export class CarsDataService extends DataBaseService {
     return response.json();
   }
 
-  public static async deleteCar(id: number): Promise<Response> {
-    const carDeleteRequestParam = 'id';
-    const request = this.createUrlRequest(URL_PATHS.garage, [
-      [carDeleteRequestParam, `${id}`],
-    ]);
+  public static async removeCar(id: number): Promise<Response> {
+    const request = this.createUrlRequest(`${URL_PATHS.garage}/${id}`, []);
     const response = await fetch(request, { method: 'DELETE' });
 
     return response;
   }
-
-  // public static async getAllCars(): Promise<CarDataInterface[]> {
-  //   const response = await fetch(`${BASE_URL}/${URL_PATHS.garage}`);
-  //   const allCarsData = await response.json();
-  //   return allCarsData;
-  // }
 }
