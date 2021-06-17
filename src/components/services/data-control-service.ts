@@ -1,4 +1,6 @@
 import { CarsDataService } from './cars-data-service';
+// import { SELECTED_CAR_BUTTON_COLOR } from '../shared/constants';
+import { CarDataInterface } from '../shared/interfaces';
 
 export class DataControlService {
   static createCarButton: HTMLButtonElement;
@@ -19,18 +21,16 @@ export class DataControlService {
 
   static selectedCarId: number;
 
-  readonly carId: number;
-
-  private requestId?: number;
+  readonly car: CarDataInterface;
 
   constructor(
     selectCarButton: HTMLButtonElement,
     removeCarButton: HTMLButtonElement,
-    carId: number
+    car: CarDataInterface
   ) {
     this.selectCarButton = selectCarButton;
     this.removeCarButton = removeCarButton;
-    this.carId = carId;
+    this.car = car;
 
     this.setCarSelectButton();
     this.setCarRemoveButton();
@@ -87,13 +87,16 @@ export class DataControlService {
       DataControlService.updateCarButton.removeAttribute('disabled');
       DataControlService.updateCarNameInput.removeAttribute('disabled');
       DataControlService.updateCarColorInput.removeAttribute('disabled');
-      DataControlService.selectedCarId = this.carId;
+      DataControlService.updateCarNameInput.value = this.car.name;
+      DataControlService.updateCarColorInput.value = this.car.color;
+      DataControlService.selectedCarId = this.car.id;
+      // this.selectCarButton.style.color = SELECTED_CAR_BUTTON_COLOR;
     });
   }
 
   public setCarRemoveButton(): void {
     this.removeCarButton.addEventListener('click', () => {
-      CarsDataService.removeCar(this.carId);
+      CarsDataService.removeCar(this.car.id);
     });
   }
 }

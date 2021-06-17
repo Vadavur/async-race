@@ -65,6 +65,8 @@ export const BUTTONS = {
 
 export const END_RACE_MESSAGE = 'Race is over';
 
+// export const SELECTED_BUTTON_CLASS = '#7dec41';
+
 export const INPUTS_ATTRIBUTES = {
   createCarName: {
     type: 'text',

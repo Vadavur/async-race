@@ -24,7 +24,7 @@ export class TrackSection extends BaseComponent {
     this.carDataHandler = new DataControlService(
       this.carControlPanel.selectCarButton.element as HTMLButtonElement,
       this.carControlPanel.removeCarButton.element as HTMLButtonElement,
-      this.trackId
+      car
     );
   }
 }
