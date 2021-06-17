@@ -1,4 +1,4 @@
-import {} from '../shared/constants';
+import { CUSTOM_EVENTS } from '../shared/constants';
 import { PageField } from '../page-field/page-field';
 
 export class ViewService {
@@ -12,6 +12,10 @@ export class ViewService {
     this.pageField.winnersButton.element.addEventListener('click', () => {
       this.showWinnersField();
     });
+
+    document.addEventListener(CUSTOM_EVENTS.refreshPage, () => {
+      this.refreshPage();
+    });
   }
 
   showGarageField(): void {
@@ -22,5 +26,9 @@ export class ViewService {
   showWinnersField(): void {
     this.pageField.garageField.element.style.display = 'none';
     this.pageField.winnersField.element.style.display = 'block';
+  }
+
+  refreshPage(): void {
+    this.pageField.garageField.refreshRaceField();
   }
 }

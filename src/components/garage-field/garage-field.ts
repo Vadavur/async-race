@@ -1,10 +1,13 @@
 import './garage-field.scss';
-import { BUTTONS, INPUTS_ATTRIBUTES } from '../shared/constants';
+import {
+  BUTTONS,
+  INPUTS_ATTRIBUTES,
+  INITIAL_PAGE_NUMBER,
+} from '../shared/constants';
 import { BaseComponent } from '../shared/base-component';
 import { CarDataForm } from '../car-data-form/car-data-form';
 import { RaceControlPanel } from '../race-control-panel/race-control-panel';
 import { RaceField } from '../race-field/race-field';
-import { GarageViewService } from '../services/garage-view-service';
 import { DataControlService } from '../services/data-control-service';
 
 export class GarageField extends BaseComponent {
@@ -14,12 +17,14 @@ export class GarageField extends BaseComponent {
 
   readonly raceControlPanel: RaceControlPanel;
 
-  readonly raceField: RaceField;
+  readonly currentPageNumber: number;
 
-  private readonly garageViewer: GarageViewService;
+  raceField: RaceField;
 
   constructor() {
     super('div', ['garage-field']);
+
+    this.currentPageNumber = INITIAL_PAGE_NUMBER;
 
     this.createCarForm = new CarDataForm(
       INPUTS_ATTRIBUTES.createCarName,
@@ -32,9 +37,7 @@ export class GarageField extends BaseComponent {
       BUTTONS.updateCar
     );
     this.raceControlPanel = new RaceControlPanel();
-    this.raceField = new RaceField();
-    this.garageViewer = new GarageViewService(this.raceField);
-    this.garageViewer.generateRaceField();
+    this.raceField = new RaceField(this.currentPageNumber);
 
     DataControlService.setCarCreateButton(
       this.createCarForm.submitButton.element as HTMLButtonElement,
@@ -49,6 +52,13 @@ export class GarageField extends BaseComponent {
     this.element.appendChild(this.createCarForm.element);
     this.element.appendChild(this.updateCarForm.element);
     this.element.appendChild(this.raceControlPanel.element);
+    this.element.appendChild(this.raceField.element);
+  }
+
+  public refreshRaceField(): void {
+    const garageFieldElements = this.element.childNodes;
+    garageFieldElements[garageFieldElements.length - 1].remove();
+    this.raceField = new RaceField(this.currentPageNumber);
     this.element.appendChild(this.raceField.element);
   }
 }

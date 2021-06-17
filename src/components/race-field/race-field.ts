@@ -9,9 +9,9 @@ import { CarDataInterface } from '../shared/interfaces';
 import { TrackSection } from '../track-section/track-section';
 
 export class RaceField extends BaseComponent {
-  private carsNumber?: number;
+  private currentPageNumber: number;
 
-  private currentPageNumber = 1;
+  private carsNumber?: number;
 
   private garageTitle?: TextComponent;
 
@@ -27,8 +27,9 @@ export class RaceField extends BaseComponent {
 
   nextPageButton: ButtonComponent;
 
-  constructor() {
+  constructor(currentPageNumber: number) {
     super('div', ['race-field']);
+    this.currentPageNumber = currentPageNumber;
     this.buttonField = document.createElement('div');
     this.buttonField.classList.add('race-field__button-field');
 

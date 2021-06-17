@@ -63,9 +63,15 @@ export const BUTTONS = {
   },
 };
 
+export const CUSTOM_EVENTS = {
+  refreshPage: 'refreshPage',
+};
+
+export const INITIAL_PAGE_NUMBER = 1;
+
 export const END_RACE_MESSAGE = 'Race is over';
 
-// export const SELECTED_BUTTON_CLASS = '#7dec41';
+export const DEFAULT_CAR_COLOR = '#000000';
 
 export const INPUTS_ATTRIBUTES = {
   createCarName: {

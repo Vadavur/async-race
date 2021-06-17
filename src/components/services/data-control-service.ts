@@ -1,6 +1,6 @@
-import { CarsDataService } from './cars-data-service';
-// import { SELECTED_CAR_BUTTON_COLOR } from '../shared/constants';
+import { DEFAULT_CAR_COLOR, CUSTOM_EVENTS } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';
+import { CarsDataService } from './cars-data-service';
 
 export class DataControlService {
   static createCarButton: HTMLButtonElement;
@@ -57,9 +57,7 @@ export class DataControlService {
     this.updateCarButton = updateCarButton;
     this.updateCarNameInput = updateCarNameInput;
     this.updateCarColorInput = updateCarColorInput;
-    DataControlService.updateCarButton.setAttribute('disabled', '');
-    DataControlService.updateCarNameInput.setAttribute('disabled', '');
-    DataControlService.updateCarColorInput.setAttribute('disabled', '');
+    this.setInputsInitialState();
     this.updateCarButton.addEventListener('click', () => {
       this.updateCar(this.selectedCarId);
     });
@@ -70,8 +68,14 @@ export class DataControlService {
       name: this.createCarNameInput.value,
       color: this.createCarColorInput.value,
     };
-    this.refreshGarageField();
-    CarsDataService.createCar(JSON.stringify(dataParams));
+    CarsDataService.createCar(JSON.stringify(dataParams)).then(() => {
+      document.dispatchEvent(
+        new CustomEvent(CUSTOM_EVENTS.refreshPage, {
+          detail: CUSTOM_EVENTS.refreshPage,
+        })
+      );
+      this.setInputsInitialState();
+    });
   }
 
   public static updateCar(carId: number): void {
@@ -79,14 +83,15 @@ export class DataControlService {
       name: this.updateCarNameInput.value,
       color: this.updateCarColorInput.value,
     };
-    this.refreshGarageField();
-    CarsDataService.updateCar(carId, JSON.stringify(dataParams));
-    DataControlService.updateCarButton.setAttribute('disabled', '');
-    DataControlService.updateCarNameInput.setAttribute('disabled', '');
-    DataControlService.updateCarColorInput.setAttribute('disabled', '');
+    CarsDataService.updateCar(carId, JSON.stringify(dataParams)).then(() => {
+      document.dispatchEvent(
+        new CustomEvent(CUSTOM_EVENTS.refreshPage, {
+          detail: CUSTOM_EVENTS.refreshPage,
+        })
+      );
+      this.setInputsInitialState();
+    });
   }
-
-  public static refreshGarageField(): void {}
 
   public setCarSelectButton(): void {
     this.selectCarButton.addEventListener('click', () => {
@@ -96,13 +101,29 @@ export class DataControlService {
       DataControlService.updateCarNameInput.value = this.car.name;
       DataControlService.updateCarColorInput.value = this.car.color;
       DataControlService.selectedCarId = this.car.id;
-      // this.selectCarButton.style.color = SELECTED_CAR_BUTTON_COLOR;
     });
   }
 
   public setCarRemoveButton(): void {
     this.removeCarButton.addEventListener('click', () => {
-      CarsDataService.removeCar(this.car.id);
+      CarsDataService.removeCar(this.car.id).then(() => {
+        document.dispatchEvent(
+          new CustomEvent(CUSTOM_EVENTS.refreshPage, {
+            detail: CUSTOM_EVENTS.refreshPage,
+          })
+        );
+        DataControlService.setInputsInitialState();
+      });
     });
+  }
+
+  private static setInputsInitialState() {
+    this.updateCarButton.setAttribute('disabled', '');
+    this.updateCarNameInput.setAttribute('disabled', '');
+    this.updateCarColorInput.setAttribute('disabled', '');
+    this.updateCarNameInput.value = '';
+    this.updateCarColorInput.value = DEFAULT_CAR_COLOR;
+    this.createCarNameInput.value = '';
+    this.createCarColorInput.value = DEFAULT_CAR_COLOR;
   }
 }
