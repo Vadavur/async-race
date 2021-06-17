@@ -1,6 +1,6 @@
 import './car-field.scss';
 import { BaseComponent } from '../shared/base-component';
-import { INLINE_SVG_CARBODY_ID } from '../shared/constants';
+import { INLINE_SVG_IDS } from '../shared/constants';
 
 export class CarField extends BaseComponent {
   constructor(carColor: string, carId: number) {
@@ -15,7 +15,7 @@ export class CarField extends BaseComponent {
 
   setCarView(carColor: string, carId: number): void {
     this.element.setAttribute('data-before', carId.toString());
-    const carBody = this.element.querySelector(`#${INLINE_SVG_CARBODY_ID}`);
+    const carBody = this.element.querySelector(`#${INLINE_SVG_IDS.carBody}`);
     (carBody as HTMLElement).style.fill = carColor;
   }
 }

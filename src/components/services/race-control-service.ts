@@ -1,5 +1,5 @@
 import {
-  ENGINE_WRECKED_ELEMENT_CLASS,
+  ENGINE_STATUS_ELEMENT_CLASS,
   REQUEST_PARAMS,
 } from '../shared/constants';
 import { EngineDataService } from './engine-data-service';
@@ -72,7 +72,7 @@ export class RaceControlService {
   public setTestControlButtons(): void {
     this.startTestButton.addEventListener('click', () => {
       this.startTestButton.setAttribute('disabled', '');
-      this.carElement.classList.remove(ENGINE_WRECKED_ELEMENT_CLASS);
+      this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
       this.runEngine();
     });
     this.stopTestButton.addEventListener('click', () => {
@@ -82,7 +82,8 @@ export class RaceControlService {
   }
 
   private runEngine(): void {
-    this.carElement.classList.remove(ENGINE_WRECKED_ELEMENT_CLASS);
+    this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
+    this.carElement.classList.add(ENGINE_STATUS_ELEMENT_CLASS.on);
     EngineDataService.setEngineMode(
       this.carId,
       REQUEST_PARAMS.engineStarted
@@ -122,7 +123,7 @@ export class RaceControlService {
       if (this.requestId) {
         window.cancelAnimationFrame(this.requestId);
       }
-      this.carElement.classList.add(ENGINE_WRECKED_ELEMENT_CLASS);
+      this.carElement.classList.add(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
       this.stopEngine();
     });
   }
@@ -132,6 +133,7 @@ export class RaceControlService {
       this.carId,
       REQUEST_PARAMS.engineStopped
     ).then(() => {
+      this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.on);
       this.startTestButton.removeAttribute('disabled');
     });
   }
@@ -141,7 +143,7 @@ export class RaceControlService {
       window.cancelAnimationFrame(this.requestId);
     }
     this.stopEngine();
-    this.carElement.classList.remove(ENGINE_WRECKED_ELEMENT_CLASS);
+    this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
     this.carElement.style.transform = `translateX(0)`;
   }
 }

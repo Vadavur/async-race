@@ -10,6 +10,10 @@
   z-index: 10;
 }
 
+.car-lights {
+  fill: #212121;
+}
+
 .car-field::before {
   width: 1.1rem;
   height: 1.1rem;
@@ -41,4 +45,26 @@
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0.6;
+}
+
+.car-field_engine-on .car-lights {
+  fill: #f8fad7;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.car-field_engine-wrecked .car-lights {
+  fill: #ffa600;
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;
 }

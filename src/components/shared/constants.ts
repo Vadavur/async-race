@@ -81,6 +81,16 @@ export const RANDOM_COLOR_NUMERIC_BASE = 16;
 
 export const DEFAULT_CAR_COLOR = '#000000';
 
+export const CAR_LIGHTS_ON_COLOR = '#FEFFEB';
+
+export const CAR_LIGHTS_OFF_COLOR = '#212121';
+
+export const INLINE_SVG_IDS = {
+  carBody: 'car-body',
+  rightCarLight: 'right-car-light',
+  leftCarLight: 'left-car-light',
+};
+
 export const INPUTS_ATTRIBUTES = {
   createCarName: {
     type: 'text',
@@ -148,11 +158,12 @@ export const SERVER_ERROR = {
   messageToUserClassList: 'server-error',
 };
 
-export const ENGINE_WRECKED_ELEMENT_CLASS = 'car-field_engine-wrecked';
+export const ENGINE_STATUS_ELEMENT_CLASS = {
+  wrecked: 'car-field_engine-wrecked',
+  on: 'car-field_engine-on',
+};
 
 export const REQUEST_PARAMS = {
   engineStarted: { name: 'status', value: 'started' },
   engineStopped: { name: 'status', value: 'stopped' },
 };
-
-export const INLINE_SVG_CARBODY_ID = 'car-body';

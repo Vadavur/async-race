@@ -7,7 +7,3 @@ export function runAppAppendedTo(rootElement: HTMLElement): void {
   viewHandler.showGarageField();
   rootElement.appendChild(pageField.element);
 }
-
-// TODOs:
-
-// delete TODOs
