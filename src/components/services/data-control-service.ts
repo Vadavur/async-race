@@ -4,6 +4,7 @@ import {
   RANDOM_CARS_NUMBER,
   RANDOM_COLOR_MULTIPLIER,
   RANDOM_COLOR_NUMERIC_BASE,
+  CARS_DATA,
 } from '../shared/constants';
 import { CarDataInterface } from '../shared/interfaces';
 import { CarsDataService } from './cars-data-service';
@@ -96,11 +97,9 @@ export class DataControlService {
   }
 
   public static async createRandomCars(): Promise<void> {
-    const carsDataArray = await (await fetch('/public/car-list.json')).json();
-    const carMakeNumber = carsDataArray.length;
+    const carMakeNumber = CARS_DATA.length;
     for (let i = 0; i < RANDOM_CARS_NUMBER; i++) {
-      const newCarData =
-        carsDataArray[Math.floor(Math.random() * carMakeNumber)];
+      const newCarData = CARS_DATA[Math.floor(Math.random() * carMakeNumber)];
       const newCarMake = newCarData.brand;
       const carModelNumber = newCarData.models.length;
       const newCarModel =
@@ -120,6 +119,30 @@ export class DataControlService {
         this.setInputsInitialState();
       });
     }
+    // const carsDataArray = await (await fetch('./public/car-list.json')).json();
+    // const carMakeNumber = carsDataArray.length;
+    // for (let i = 0; i < RANDOM_CARS_NUMBER; i++) {
+    //   const newCarData =
+    //     carsDataArray[Math.floor(Math.random() * carMakeNumber)];
+    //   const newCarMake = newCarData.brand;
+    //   const carModelNumber = newCarData.models.length;
+    //   const newCarModel =
+    //     newCarData.models[Math.floor(Math.random() * carModelNumber)];
+    //   const dataParams = {
+    //     name: `${newCarMake} ${newCarModel}`,
+    //     color: `#${Math.floor(Math.random() * RANDOM_COLOR_MULTIPLIER).toString(
+    //       RANDOM_COLOR_NUMERIC_BASE
+    //     )}`,
+    //   };
+    //   CarsDataService.createCar(JSON.stringify(dataParams)).then(() => {
+    //     document.dispatchEvent(
+    //       new CustomEvent(CUSTOM_EVENTS.refreshPage, {
+    //         detail: CUSTOM_EVENTS.refreshPage,
+    //       })
+    //     );
+    //     this.setInputsInitialState();
+    //   });
+    // }
   }
 
   public static updateCar(carId: number): void {
