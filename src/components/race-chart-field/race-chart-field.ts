@@ -4,6 +4,8 @@ import {
   BROKEN_ENGINE_FLAG,
   BUTTONS,
   TEXT_TEMPLATES,
+  MS_TO_SEC_MULTIPLIER,
+  WINNER_TIME_LENGTH,
 } from '../shared/constants';
 import { ButtonComponent } from '../shared/button-component/button-component';
 import { TextComponent } from '../shared/text-component/text-component';
@@ -19,7 +21,7 @@ export class RaceChartField extends BaseComponent {
   constructor(raceIdChart: { carId: number; finishTime: number }[]) {
     super('div', ['race-chart-field']);
     this.popupBackground = document.createElement('DIV') as HTMLDivElement;
-    this.popupBackground.classList.add('.race-chart-field__window');
+    this.popupBackground.classList.add('race-chart-field__window');
     this.chartList = document.createElement('UL') as HTMLUListElement;
     this.setChartList(raceIdChart);
     this.closeButton = new ButtonComponent(
@@ -35,6 +37,9 @@ export class RaceChartField extends BaseComponent {
     raceIdChart.forEach((chartMember, index) => {
       const indexShift = 1;
       const newListItem = document.createElement('LI');
+      const secondsFinishTime = `${
+        Math.floor(chartMember.finishTime) * MS_TO_SEC_MULTIPLIER
+      }`.slice(0, WINNER_TIME_LENGTH);
       CarsDataService.getCarById(chartMember.carId).then((car) => {
         if (chartMember.finishTime !== BROKEN_ENGINE_FLAG) {
           newListItem.innerText = TextComponent.createTextFromTemplate(
@@ -43,7 +48,7 @@ export class RaceChartField extends BaseComponent {
               `${index + indexShift}`,
               car.name,
               `${chartMember.carId}`,
-              `${Math.floor(chartMember.finishTime)}`,
+              `${secondsFinishTime}`,
             ]
           );
         } else {
@@ -52,8 +57,8 @@ export class RaceChartField extends BaseComponent {
             [`${index + indexShift}`, car.name, `${chartMember.carId}`]
           );
         }
-        this.chartList.appendChild(newListItem);
       });
+      this.chartList.appendChild(newListItem);
     });
   }
 }

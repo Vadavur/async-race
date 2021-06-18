@@ -1,18 +1,25 @@
 import './car-field.scss';
 import { BaseComponent } from '../shared/base-component';
-import { INLINE_SVG_IDS, CAR_ENGINE_STATUS } from '../shared/constants';
+import {
+  INLINE_SVG_IDS,
+  CAR_ENGINE_STATUS,
+  CAR_INLINE_SVG,
+} from '../shared/constants';
 
 export class CarField extends BaseComponent {
   engineStatus = CAR_ENGINE_STATUS.engineStopped;
 
   constructor(carColor: string, carId: number) {
     super('div', ['car-field']);
-    fetch('/public/car.svg')
-      .then((res) => res.text())
-      .then((SVGText) => {
-        this.element.innerHTML = SVGText;
-        this.setCarView(carColor, carId);
-      });
+    this.element.innerHTML = CAR_INLINE_SVG;
+    this.setCarView(carColor, carId);
+
+    // fetch('/public/car.svg')
+    //   .then((res) => res.text())
+    //   .then((SVGText) => {
+    //     this.element.innerHTML = SVGText;
+    //     this.setCarView(carColor, carId);
+    //   });
   }
 
   setCarView(carColor: string, carId: number): void {
