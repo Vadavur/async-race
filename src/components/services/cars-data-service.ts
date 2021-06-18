@@ -4,7 +4,10 @@ import {
   GARAGE_PAGE,
   TRACK_LINES_PAGE_LIMIT,
 } from '../shared/constants';
-import { CarsOnPageDataInterface } from '../shared/interfaces';
+import {
+  CarsOnPageDataInterface,
+  CarDataInterface,
+} from '../shared/interfaces';
 
 export class CarsDataService extends DataBaseService {
   public static async getCarsOnPageData(
@@ -24,6 +27,13 @@ export class CarsDataService extends DataBaseService {
       carsOnPageData,
       allCarsNumber: +(allCarsNumber as string),
     };
+  }
+
+  public static async getCarById(id: number): Promise<CarDataInterface> {
+    const request = this.createUrlRequest(`${URL_PATHS.garage}/${id}`, []);
+    const response = await fetch(request, { method: 'GET' });
+
+    return response.json();
   }
 
   public static async createCar(dataParams: BodyInit): Promise<Response> {

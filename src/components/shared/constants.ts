@@ -61,11 +61,17 @@ export const BUTTONS = {
     label: 'next'.toUpperCase(),
     className: 'btn_next-page',
   },
+  closeChart: {
+    label: 'ok'.toUpperCase(),
+    className: 'btn_close-chart',
+  },
 };
 
 export const CUSTOM_EVENTS = {
   refreshPage: 'refreshPage',
 };
+
+export const BROKEN_ENGINE_FLAG = -1;
 
 export const WINNERS_NUMBER = 10;
 
@@ -119,6 +125,16 @@ export const INPUTS_ATTRIBUTES = {
 };
 
 export const TEXT_TEMPLATES = {
+  chartListItemWinner: {
+    text: '_position_. _carName_ (#_carId_) : _finalTime_ seconds',
+    parameterFields: ['_position_', '_carName_', '_carId_', '_finalTime_'],
+    className: 'txt_chart-list',
+  },
+  chartListItemLoser: {
+    text: "_position_. _carName_ (#_carId_) didn't make it...",
+    parameterFields: ['_position_', '_carName_', '_carId_'],
+    className: 'txt_chart-list',
+  },
   garageTitle: {
     text: 'Garage (_carNumber_ cars)',
     parameterFields: ['_carNumber_'],
@@ -173,4 +189,9 @@ export const CAR_ENGINE_STATUS_PARAMETER_NAME = 'status';
 export const CAR_ENGINE_STATUS = {
   engineStarted: 'started',
   engineStopped: 'stopped',
+};
+
+export const RACE_STATUS = {
+  started: 'started',
+  stopped: 'stopped',
 };

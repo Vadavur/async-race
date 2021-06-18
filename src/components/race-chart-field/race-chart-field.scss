@@ -1,0 +1,23 @@
+.race-chart-field {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 9;
+  color: #24232350;
+}
+
+.race-chart-field__window {
+  width: 20rem;
+  height: 15rem;
+  position: fixed;
+  left: calc((100%-20rem) / 2);
+  top: 50%;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  background-color: rgb(182, 181, 181);
+  z-index: 10;
+}

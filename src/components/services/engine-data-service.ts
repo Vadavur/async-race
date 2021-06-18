@@ -18,7 +18,7 @@ export class EngineDataService extends DataBaseService {
     return raceData;
   }
 
-  public static async getRaceStatus(id: number): Promise<string> {
+  public static async getCarResult(id: number): Promise<string> {
     const engineIdRequestParamName = 'id';
     const engineStatusRequestParam = { name: 'status', value: 'drive' };
     const request = this.createUrlRequest(URL_PATHS.engine, [

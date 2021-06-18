@@ -1,12 +1,22 @@
 import {
   ENGINE_STATUS_ELEMENT_CLASS,
   REQUEST_PARAMS,
-  CAR_ENGINE_STATUS_PARAMETER_NAME,
   CAR_ENGINE_STATUS,
+  RACE_STATUS,
+  BROKEN_ENGINE_FLAG,
 } from '../shared/constants';
 import { EngineDataService } from './engine-data-service';
+import { RaceChartField } from '../race-chart-field/race-chart-field';
 
 export class RaceControlService {
+  static raceStatus = RACE_STATUS.stopped;
+
+  static activeCars = 0;
+
+  static bestCar = { time: 0, id: '' };
+
+  static raceIdChart: { carId: number; finishTime: number }[];
+
   static raceControlHandlers: RaceControlService[] = [];
 
   static startRaceButton: HTMLButtonElement;
@@ -58,32 +68,41 @@ export class RaceControlService {
   }
 
   public static startRace(): void {
+    this.raceIdChart = [];
+    this.raceStatus = RACE_STATUS.started;
+    this.activeCars = 0;
     this.raceControlHandlers.forEach((handler) => {
+      this.activeCars++;
       handler.startTestButton.setAttribute('disabled', '');
       handler.runEngine();
     });
   }
 
   public static resetRace(): void {
+    this.raceStatus = RACE_STATUS.stopped;
+    this.activeCars = 0;
     this.raceControlHandlers.forEach((handler) => {
       handler.startTestButton.removeAttribute('disabled');
+      handler.stopTestButton.setAttribute('disabled', '');
       handler.stopTest();
     });
   }
 
   public setTestControlButtons(): void {
     this.startTestButton.addEventListener('click', () => {
-      this.startTestButton.setAttribute('disabled', '');
       this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
       this.runEngine();
     });
+    this.stopTestButton.setAttribute('disabled', '');
     this.stopTestButton.addEventListener('click', () => {
+      this.stopTestButton.setAttribute('disabled', '');
       this.startTestButton.removeAttribute('disabled');
       this.stopTest();
     });
   }
 
   private runEngine(): void {
+    this.startTestButton.setAttribute('disabled', '');
     this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
     this.carElement.classList.add(ENGINE_STATUS_ELEMENT_CLASS.on);
     this.carElement.setAttribute(
@@ -94,12 +113,15 @@ export class RaceControlService {
       this.carId,
       REQUEST_PARAMS.engineStarted
     ).then((result) => {
+      if (RaceControlService.raceStatus === RACE_STATUS.stopped) {
+        this.stopTestButton.removeAttribute('disabled');
+      }
       const finishTime = result.distance / result.velocity;
-      this.runCar(finishTime, EngineDataService.getRaceStatus(this.carId));
+      this.runCar(finishTime, EngineDataService.getCarResult(this.carId));
     });
   }
 
-  private runCar(finishTime: number, raceStatus: Promise<string>): void {
+  private runCar(finishTime: number, getCarResult: Promise<string>): void {
     let startTime: DOMHighResTimeStamp = 0;
 
     const raceCompletedValue = 1;
@@ -125,17 +147,64 @@ export class RaceControlService {
     };
 
     window.requestAnimationFrame(moveCar);
-    raceStatus.catch(() => {
-      if (this.requestId) {
-        window.cancelAnimationFrame(this.requestId);
+    getCarResult
+      .then(() => {
+        if (RaceControlService.raceStatus === RACE_STATUS.started) {
+          RaceControlService.activeCars--;
+          RaceControlService.putCarResultToChart(this.carId, finishTime);
+          if (RaceControlService.activeCars === 0) {
+            RaceControlService.showRaceResult();
+          }
+        }
+      })
+      .catch(() => {
+        if (RaceControlService.raceStatus === RACE_STATUS.started) {
+          RaceControlService.activeCars--;
+          RaceControlService.putCarResultToChart(
+            this.carId,
+            BROKEN_ENGINE_FLAG
+          );
+          if (RaceControlService.activeCars === 0) {
+            RaceControlService.showRaceResult();
+          }
+        }
+        if (this.requestId) {
+          window.cancelAnimationFrame(this.requestId);
+        }
+        if (
+          this.carElement.getAttribute('engineStatus') ===
+          CAR_ENGINE_STATUS.engineStarted
+        ) {
+          this.carElement.classList.add(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
+          this.stopEngine();
+        }
+      });
+  }
+
+  private static putCarResultToChart(carId: number, finishTime: number): void {
+    if (finishTime === BROKEN_ENGINE_FLAG || this.raceIdChart.length === 0) {
+      this.raceIdChart.push({ carId, finishTime });
+    } else {
+      const nextPosition = this.raceIdChart.findIndex((elem) => {
+        return (
+          elem.finishTime === BROKEN_ENGINE_FLAG || elem.finishTime > finishTime
+        );
+      });
+      if (nextPosition === -1) {
+        this.raceIdChart.push({ carId, finishTime });
+      } else {
+        this.raceIdChart.splice(nextPosition, 0, { carId, finishTime });
       }
-      if (
-        this.carElement.getAttribute('engineStatus') ===
-        CAR_ENGINE_STATUS.engineStarted
-      ) {
-        this.carElement.classList.add(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
-        this.stopEngine();
-      }
+    }
+  }
+
+  private static showRaceResult(): void {
+    const raceChartField = new RaceChartField(this.raceIdChart);
+    document.body.appendChild(raceChartField.element);
+    raceChartField.closeButton.element.addEventListener('click', () => {
+      this.resetRace();
+      raceChartField.element.remove();
+      this.startRaceButton.removeAttribute('disabled');
     });
   }
 
@@ -149,7 +218,9 @@ export class RaceControlService {
         CAR_ENGINE_STATUS.engineStopped
       );
       this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.on);
-      this.startTestButton.removeAttribute('disabled');
+      if (RaceControlService.raceStatus === RACE_STATUS.stopped) {
+        this.startTestButton.removeAttribute('disabled');
+      }
     });
   }
 
