@@ -6,19 +6,16 @@ import { CarsDataService } from '../services/cars-data-service';
 import {
   TEXT_TEMPLATES,
   SERVER_ERROR,
-  TABLE_HEADER_CONTENT,
+  TABLE_HEADER,
   CLASSES,
 } from '../shared/constants';
 import { WinnerDataInterface } from '../shared/interfaces';
 import { TableRow } from '../table-row/table-row';
 import { CarField } from '../car-field/car-field';
+import { ScoreControlService } from '../services/score-control-service';
 
 export class ScoreField extends BaseComponent {
   private currentPageNumber: number;
-
-  private currentSortType: string;
-
-  private currentSortOrder: string;
 
   winnersNumber?: number;
 
@@ -28,28 +25,26 @@ export class ScoreField extends BaseComponent {
 
   private scoreTable: HTMLTableElement;
 
-  private tableHeader?: TableRow;
+  tableHeader: TableRow;
 
   readonly tableRows: TableRow[] = [];
 
   private winnersOnPage?: WinnerDataInterface[];
 
-  constructor(
-    currentPageNumber: number,
-    currentSortType: string,
-    currentSortOrder: string
-  ) {
+  constructor(currentPageNumber: number) {
     super('div', ['score-field']);
 
     this.scoreTable = document.createElement('TABLE') as HTMLTableElement;
     this.currentPageNumber = currentPageNumber;
-    this.currentSortType = currentSortType;
-    this.currentSortOrder = currentSortOrder;
+    this.tableHeader = new TableRow(TABLE_HEADER.content);
+    this.setTableHeader();
+    this.scoreTable.appendChild(this.tableHeader.element);
+    this.tableHeader.element.classList.add(CLASSES.tableHeaderRow);
 
     WinnersDataService.getWinnersOnPageData(
       this.currentPageNumber,
-      this.currentSortType,
-      this.currentSortOrder
+      ScoreControlService.currentSortType,
+      ScoreControlService.currentSortOrder
     )
       .then((winners) => {
         this.winnersNumber = winners.allWinnersNumber;
@@ -58,10 +53,6 @@ export class ScoreField extends BaseComponent {
         this.element.appendChild(this.winnersTitle.element);
         this.element.appendChild(this.pageTitle.element);
         this.winnersOnPage = winners.winnersOnPageData;
-
-        this.tableHeader = new TableRow(TABLE_HEADER_CONTENT);
-        this.scoreTable.appendChild(this.tableHeader.element);
-        this.tableHeader.element.classList.add(CLASSES.tableHeaderRow);
         this.setTable();
         this.element.appendChild(this.scoreTable);
       })
@@ -95,6 +86,16 @@ export class ScoreField extends BaseComponent {
     );
   }
 
+  private setTableHeader() {
+    this.tableHeader?.element.childNodes.forEach((td, index) => {
+      (td as HTMLElement).setAttribute(
+        TABLE_HEADER.attribute.name,
+        TABLE_HEADER.attribute.values[index]
+      );
+    });
+    ScoreControlService.setScoreTableHeader(this);
+  }
+
   private setTable() {
     const indexShift = 1;
     this.winnersOnPage?.forEach((winner, winnerIndex) => {
@@ -113,5 +114,25 @@ export class ScoreField extends BaseComponent {
         this.scoreTable.appendChild(newTableRow.element);
       });
     });
+  }
+
+  refreshTable(): void {
+    this.scoreTable.innerHTML = '';
+    this.scoreTable.appendChild(this.tableHeader.element);
+    WinnersDataService.getWinnersOnPageData(
+      this.currentPageNumber,
+      ScoreControlService.currentSortType,
+      ScoreControlService.currentSortOrder
+    )
+      .then((winners) => {
+        this.winnersOnPage = winners.winnersOnPageData;
+        this.setTable();
+      })
+      .catch((error) => {
+        if (error.message === SERVER_ERROR.messageFromServer) {
+          this.element.classList.add(SERVER_ERROR.messageToUserClassList);
+          this.element.innerHTML = SERVER_ERROR.messageToUser;
+        }
+      });
   }
 }

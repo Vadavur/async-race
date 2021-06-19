@@ -100,8 +100,6 @@ export class WinnersDataService extends DataBaseService {
         requestBody.time = raceWinnerResult.finishTime;
       }
       const bodyInit = JSON.stringify(requestBody);
-      console.log(requestBody);
-      console.log(bodyInit);
       await this.updateWinner(currentWinner.id, bodyInit);
       document.dispatchEvent(
         new CustomEvent(CUSTOM_EVENTS.refreshWinnersPage, {

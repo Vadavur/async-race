@@ -38,11 +38,7 @@ export class WinnersField extends BaseComponent {
     this.buttonField.appendChild(this.previousPageButton.element);
     this.buttonField.appendChild(this.nextPageButton.element);
 
-    this.scoreField = new ScoreField(
-      this.currentPageNumber,
-      this.currentSortType,
-      this.currentSortOrder
-    );
+    this.scoreField = new ScoreField(this.currentPageNumber);
 
     this.element.appendChild(this.scoreField.element);
     this.element.appendChild(this.buttonField);
@@ -50,11 +46,7 @@ export class WinnersField extends BaseComponent {
 
   public refreshScoreField(): void {
     this.scoreField.element.remove();
-    this.scoreField = new ScoreField(
-      this.currentPageNumber,
-      this.currentSortType,
-      this.currentSortOrder
-    );
+    this.scoreField = new ScoreField(this.currentPageNumber);
     this.element.insertBefore(this.scoreField.element, this.buttonField);
   }
 }

@@ -147,13 +147,19 @@ export const INPUTS_ATTRIBUTES = {
   },
 };
 
-export const TABLE_HEADER_CONTENT = [
-  'Number',
-  'Car \u296F',
-  'Name',
-  'Wins \u296F',
-  'Best time (seconds) \u296F',
-];
+export const TABLE_HEADER = {
+  content: [
+    'Number',
+    'Car \u296F',
+    'Name',
+    'Wins \u296F',
+    'Best time (seconds) \u296F',
+  ],
+  attribute: {
+    name: 'data-type',
+    values: ['', 'id', '', 'wins', 'time'],
+  },
+};
 
 export const TEXT_TEMPLATES = {
   chartListItemWinner: {
