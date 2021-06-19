@@ -14,8 +14,12 @@ export class ViewService {
     });
     this.setCarPaginationButtons();
 
-    document.addEventListener(CUSTOM_EVENTS.refreshPage, () => {
-      this.refreshPage();
+    document.addEventListener(CUSTOM_EVENTS.refreshAllPages, () => {
+      this.refreshAllPages();
+    });
+
+    document.addEventListener(CUSTOM_EVENTS.refreshWinnersPage, () => {
+      this.refreshWinnersPage();
     });
   }
 
@@ -34,19 +38,24 @@ export class ViewService {
       'click',
       () => {
         this.pageField.garageField.currentPageNumber--;
-        this.refreshPage();
+        this.refreshAllPages();
       }
     );
     this.pageField.garageField.nextPageButton.element.addEventListener(
       'click',
       () => {
         this.pageField.garageField.currentPageNumber++;
-        this.refreshPage();
+        this.refreshAllPages();
       }
     );
   }
 
-  private refreshPage(): void {
+  private refreshAllPages(): void {
     this.pageField.garageField.refreshRaceField();
+    this.pageField.winnersField.refreshScoreField();
+  }
+
+  private refreshWinnersPage(): void {
+    this.pageField.winnersField.refreshScoreField();
   }
 }

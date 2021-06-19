@@ -4,8 +4,11 @@ import {
   CAR_ENGINE_STATUS,
   RACE_STATUS,
   BROKEN_ENGINE_FLAG,
+  MS_TO_SEC_MULTIPLIER,
+  WINNER_TIME_LENGTH,
 } from '../shared/constants';
 import { EngineDataService } from './engine-data-service';
+import { WinnersDataService } from './winners-data-service';
 import { RaceChartField } from '../race-chart-field/race-chart-field';
 
 export class RaceControlService {
@@ -151,7 +154,13 @@ export class RaceControlService {
       .then(() => {
         if (RaceControlService.raceStatus === RACE_STATUS.started) {
           RaceControlService.activeCars--;
-          RaceControlService.putCarResultToChart(this.carId, finishTime);
+          const finishTimeInSeconds = +`${
+            Math.floor(finishTime) * MS_TO_SEC_MULTIPLIER
+          }`.slice(0, WINNER_TIME_LENGTH);
+          RaceControlService.putCarResultToChart(
+            this.carId,
+            finishTimeInSeconds
+          );
           if (RaceControlService.activeCars === 0) {
             RaceControlService.showRaceResult();
           }
@@ -199,6 +208,10 @@ export class RaceControlService {
   }
 
   private static showRaceResult(): void {
+    const winnerIndex = 0;
+    if (this.raceIdChart[winnerIndex].finishTime !== BROKEN_ENGINE_FLAG) {
+      WinnersDataService.updateScoreOnWin(this.raceIdChart[winnerIndex]);
+    }
     const raceChartField = new RaceChartField(this.raceIdChart);
     document.body.appendChild(raceChartField.element);
     raceChartField.closeButton.element.addEventListener('click', () => {

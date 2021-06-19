@@ -21,7 +21,8 @@ export const CAR_LIGHTS_ON_COLOR = '#FEFFEB';
 export const CAR_LIGHTS_OFF_COLOR = '#212121';
 
 export const CUSTOM_EVENTS = {
-  refreshPage: 'refreshPage',
+  refreshAllPages: 'refreshAllPages',
+  refreshWinnersPage: 'refreshWinnersPage',
 };
 
 export const BASE_URL = 'http://localhost:3000';
@@ -146,10 +147,10 @@ export const INPUTS_ATTRIBUTES = {
 
 export const TABLE_HEADER_CONTENT = [
   'Number',
-  'Car',
+  'Car \u296F',
   'Name',
-  'Wins',
-  'Best time (seconds)',
+  'Wins \u296F',
+  'Best time (seconds) \u296F',
 ];
 
 export const TEXT_TEMPLATES = {

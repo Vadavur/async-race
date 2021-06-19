@@ -1,4 +1,5 @@
 import { DataBaseService } from './data-base-service';
+import { WinnersDataService } from './winners-data-service';
 import { URL_PATHS, QUERIES } from '../shared/constants';
 import {
   CarsOnPageDataInterface,
@@ -66,7 +67,7 @@ export class CarsDataService extends DataBaseService {
   public static async removeCar(id: number): Promise<Response> {
     const request = this.createUrlRequest(`${URL_PATHS.garage}/${id}`, []);
     const response = await fetch(request, { method: 'DELETE' });
-
+    await WinnersDataService.updateScoreOnCarRemove(id);
     return response;
   }
 }

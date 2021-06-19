@@ -88,8 +88,8 @@ export class DataControlService {
     };
     CarsDataService.createCar(JSON.stringify(dataParams)).then(() => {
       document.dispatchEvent(
-        new CustomEvent(CUSTOM_EVENTS.refreshPage, {
-          detail: CUSTOM_EVENTS.refreshPage,
+        new CustomEvent(CUSTOM_EVENTS.refreshAllPages, {
+          detail: CUSTOM_EVENTS.refreshAllPages,
         })
       );
       this.setInputsInitialState();
@@ -112,8 +112,8 @@ export class DataControlService {
       };
       CarsDataService.createCar(JSON.stringify(dataParams)).then(() => {
         document.dispatchEvent(
-          new CustomEvent(CUSTOM_EVENTS.refreshPage, {
-            detail: CUSTOM_EVENTS.refreshPage,
+          new CustomEvent(CUSTOM_EVENTS.refreshAllPages, {
+            detail: CUSTOM_EVENTS.refreshAllPages,
           })
         );
         this.setInputsInitialState();
@@ -136,8 +136,8 @@ export class DataControlService {
     //   };
     //   CarsDataService.createCar(JSON.stringify(dataParams)).then(() => {
     //     document.dispatchEvent(
-    //       new CustomEvent(CUSTOM_EVENTS.refreshPage, {
-    //         detail: CUSTOM_EVENTS.refreshPage,
+    //       new CustomEvent(CUSTOM_EVENTS.refreshAllPages, {
+    //         detail: CUSTOM_EVENTS.refreshAllPages,
     //       })
     //     );
     //     this.setInputsInitialState();
@@ -152,8 +152,8 @@ export class DataControlService {
     };
     CarsDataService.updateCar(carId, JSON.stringify(dataParams)).then(() => {
       document.dispatchEvent(
-        new CustomEvent(CUSTOM_EVENTS.refreshPage, {
-          detail: CUSTOM_EVENTS.refreshPage,
+        new CustomEvent(CUSTOM_EVENTS.refreshAllPages, {
+          detail: CUSTOM_EVENTS.refreshAllPages,
         })
       );
       this.setInputsInitialState();
@@ -175,8 +175,8 @@ export class DataControlService {
     this.removeCarButton.addEventListener('click', () => {
       CarsDataService.removeCar(this.car.id).then(() => {
         document.dispatchEvent(
-          new CustomEvent(CUSTOM_EVENTS.refreshPage, {
-            detail: CUSTOM_EVENTS.refreshPage,
+          new CustomEvent(CUSTOM_EVENTS.refreshAllPages, {
+            detail: CUSTOM_EVENTS.refreshAllPages,
           })
         );
         DataControlService.setInputsInitialState();
