@@ -120,7 +120,12 @@ export class RaceControlService {
         this.stopTestButton.removeAttribute('disabled');
       }
       const finishTime = result.distance / result.velocity;
-      this.runCar(finishTime, EngineDataService.getCarResult(this.carId));
+      if (
+        this.carElement.getAttribute('engineStatus') ===
+        CAR_ENGINE_STATUS.engineStarted
+      ) {
+        this.runCar(finishTime, EngineDataService.getCarResult(this.carId));
+      }
     });
   }
 
@@ -222,32 +227,30 @@ export class RaceControlService {
   }
 
   private stopEngine(): void {
+    this.carElement.classList.remove(CLASSES.engineStatus.on);
+    if (RaceControlService.raceStatus === RACE_STATUS.stopped) {
+      this.startTestButton.removeAttribute('disabled');
+    }
+    this.carElement.setAttribute(
+      'engineStatus',
+      CAR_ENGINE_STATUS.engineStopped
+    );
     EngineDataService.setEngineMode(
       this.carId,
       REQUEST_PARAMS.engineStopped
-    ).then(() => {
-      this.carElement.setAttribute(
-        'engineStatus',
-        CAR_ENGINE_STATUS.engineStopped
-      );
-      this.carElement.classList.remove(CLASSES.engineStatus.on);
-      if (RaceControlService.raceStatus === RACE_STATUS.stopped) {
-        this.startTestButton.removeAttribute('disabled');
-      }
-    });
+    ).then(() => {});
   }
 
   private stopTest(): void {
+    this.carElement.classList.remove(CLASSES.engineStatus.wrecked);
+    this.carElement.style.transform = `translateX(0)`;
     if (this.requestId) {
       window.cancelAnimationFrame(this.requestId);
     }
-    if (
-      this.carElement.getAttribute('engineStatus') ===
-      CAR_ENGINE_STATUS.engineStarted
-    ) {
-      this.stopEngine();
-    }
-    this.carElement.classList.remove(CLASSES.engineStatus.wrecked);
-    this.carElement.style.transform = `translateX(0)`;
+    this.carElement.setAttribute(
+      'engineStatus',
+      CAR_ENGINE_STATUS.engineStopped
+    );
+    this.stopEngine();
   }
 }
