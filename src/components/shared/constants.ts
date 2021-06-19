@@ -1,11 +1,193 @@
 export const AR_GAME = { title: 'Async RACE', name: 'async-race' };
 
+export const MS_TO_SEC_MULTIPLIER = 0.001;
+
+export const BROKEN_ENGINE_FLAG = -1;
+
+export const WINNER_TIME_LENGTH = 6;
+
+export const RANDOM_CARS_NUMBER = 100;
+
+export const END_RACE_MESSAGE = 'Race is over';
+
+export const RANDOM_COLOR_MULTIPLIER = 16777215;
+
+export const RANDOM_COLOR_NUMERIC_BASE = 16;
+
+export const DEFAULT_CAR_COLOR = '#000000';
+
+export const CAR_LIGHTS_ON_COLOR = '#FEFFEB';
+
+export const CAR_LIGHTS_OFF_COLOR = '#212121';
+
+export const CUSTOM_EVENTS = {
+  refreshPage: 'refreshPage',
+};
+
 export const BASE_URL = 'http://localhost:3000';
 
 export const URL_PATHS = {
   garage: 'garage',
   engine: 'engine',
   winners: 'winners',
+};
+
+export const INITIAL_VALUES = {
+  pageNumber: 1,
+  sortType: 'wins',
+  sortOrder: 'DESC',
+};
+
+export const QUERIES = {
+  garage: {
+    pageLimit: {
+      parameter: '_limit',
+      value: 7,
+    },
+    pageNumber: {
+      parameter: '_page',
+      value: 1,
+      totalCarsNumberHeader: 'X-Total-Count',
+    },
+  },
+  winners: {
+    pageLimit: {
+      parameter: '_limit',
+      value: 10,
+    },
+    sortType: {
+      parameter: '_sort',
+      value: {
+        id: 'id',
+        wins: 'wins',
+        time: 'time',
+      },
+    },
+    sortOrder: {
+      parameter: '_order',
+      value: {
+        ascend: 'ASC',
+        descend: 'DESC',
+      },
+    },
+    pageNumber: {
+      parameter: '_page',
+      value: 1,
+      totalWinnersNumberHeader: 'X-Total-Count',
+    },
+  },
+};
+
+export const SERVER_ERROR = {
+  messageFromServer: 'Failed to fetch',
+  messageToUser: 'Server is probably not running',
+  messageToUserClassList: 'server-error',
+};
+
+export const CLASSES = {
+  engineStatus: {
+    wrecked: 'car-field_engine-wrecked',
+    on: 'car-field_engine-on',
+  },
+  carScoreView: 'car-field_score-view',
+  tableHeaderRow: 'table-row_header',
+  tableTd: 'table-row__cell',
+};
+
+export const REQUEST_PARAMS = {
+  engineStarted: { name: 'status', value: 'started' },
+  engineStopped: { name: 'status', value: 'stopped' },
+};
+
+export const CAR_ENGINE_STATUS_PARAMETER_NAME = 'status';
+
+export const CAR_ENGINE_STATUS = {
+  engineStarted: 'started',
+  engineStopped: 'stopped',
+};
+
+export const RACE_STATUS = {
+  started: 'started',
+  stopped: 'stopped',
+};
+
+export const INLINE_SVG_IDS = {
+  carBody: 'car-body',
+  rightCarLight: 'right-car-light',
+  leftCarLight: 'left-car-light',
+};
+
+export const INPUTS_ATTRIBUTES = {
+  createCarName: {
+    type: 'text',
+    placeholder: 'Car make and model',
+    name: 'car-name-create',
+    required: '',
+    pattern: `/^[^ ]+ [^ ]+/`,
+    onInvalidValueText: `This input field should contain car make and model devided by space`,
+  },
+  updateCarName: {
+    type: 'text',
+    placeholder: 'Car make and model',
+    name: 'car-name-update',
+    pattern: `/^[^ ]+ [^ ]+/`,
+    onInvalidValueText: `This input field should contain car make and model devided by space`,
+  },
+  createCarColor: {
+    type: 'color',
+    name: 'car-color-create',
+    required: '',
+  },
+  updateCarColor: {
+    type: 'color',
+    name: 'car-color-update',
+  },
+};
+
+export const TABLE_HEADER_CONTENT = [
+  'Number',
+  'Car',
+  'Name',
+  'Wins',
+  'Best time (seconds)',
+];
+
+export const TEXT_TEMPLATES = {
+  chartListItemWinner: {
+    text: '_position_. _carName_ (#_carId_) : _finalTime_ seconds',
+    parameterFields: ['_position_', '_carName_', '_carId_', '_finalTime_'],
+    className: 'txt_chart-list',
+  },
+  chartListItemLoser: {
+    text: "_position_. _carName_ (#_carId_) didn't make it...",
+    parameterFields: ['_position_', '_carName_', '_carId_'],
+    className: 'txt_chart-list',
+  },
+  garageTitle: {
+    text: 'Garage (_carNumber_ cars)',
+    parameterFields: ['_carNumber_'],
+    className: 'txt_garage-title',
+  },
+  winnersTitle: {
+    text: 'Winners (_winnerNumber_ racers)',
+    parameterFields: ['_winnerNumber_'],
+    className: 'txt_winners-title',
+  },
+  pageTitle: {
+    text: 'Page #_pageNumber_',
+    parameterFields: ['_pageNumber_'],
+    className: 'txt_text-title',
+  },
+  gameTitle: {
+    text: 'Async RACE',
+    parameterFields: [],
+    className: 'page-field__game-title',
+  },
+  carName: {
+    text: '_carName_',
+    parameterFields: ['_carName_'],
+    className: 'txt_car-name',
+  },
 };
 
 export const BUTTONS = {
@@ -65,139 +247,6 @@ export const BUTTONS = {
     label: 'ok'.toUpperCase(),
     className: 'btn_close-chart',
   },
-};
-
-export const CUSTOM_EVENTS = {
-  refreshPage: 'refreshPage',
-};
-
-export const MS_TO_SEC_MULTIPLIER = 0.001;
-
-export const BROKEN_ENGINE_FLAG = -1;
-
-export const WINNERS_NUMBER = 10;
-
-export const WINNER_TIME_LENGTH = 6;
-
-export const RANDOM_CARS_NUMBER = 100;
-
-export const INITIAL_PAGE_NUMBER = 1;
-
-export const END_RACE_MESSAGE = 'Race is over';
-
-export const RANDOM_COLOR_MULTIPLIER = 16777215;
-
-export const RANDOM_COLOR_NUMERIC_BASE = 16;
-
-export const DEFAULT_CAR_COLOR = '#000000';
-
-export const CAR_LIGHTS_ON_COLOR = '#FEFFEB';
-
-export const CAR_LIGHTS_OFF_COLOR = '#212121';
-
-export const INLINE_SVG_IDS = {
-  carBody: 'car-body',
-  rightCarLight: 'right-car-light',
-  leftCarLight: 'left-car-light',
-};
-
-export const INPUTS_ATTRIBUTES = {
-  createCarName: {
-    type: 'text',
-    placeholder: 'Car make and model',
-    name: 'car-name-create',
-    required: '',
-    pattern: `/^[^ ]+ [^ ]+/`,
-    onInvalidValueText: `This input field should contain car make and model devided by space`,
-  },
-  updateCarName: {
-    type: 'text',
-    placeholder: 'Car make and model',
-    name: 'car-name-update',
-    pattern: `/^[^ ]+ [^ ]+/`,
-    onInvalidValueText: `This input field should contain car make and model devided by space`,
-  },
-  createCarColor: {
-    type: 'color',
-    name: 'car-color-create',
-    required: '',
-  },
-  updateCarColor: {
-    type: 'color',
-    name: 'car-color-update',
-  },
-};
-
-export const TEXT_TEMPLATES = {
-  chartListItemWinner: {
-    text: '_position_. _carName_ (#_carId_) : _finalTime_ seconds',
-    parameterFields: ['_position_', '_carName_', '_carId_', '_finalTime_'],
-    className: 'txt_chart-list',
-  },
-  chartListItemLoser: {
-    text: "_position_. _carName_ (#_carId_) didn't make it...",
-    parameterFields: ['_position_', '_carName_', '_carId_'],
-    className: 'txt_chart-list',
-  },
-  garageTitle: {
-    text: 'Garage (_carNumber_ cars)',
-    parameterFields: ['_carNumber_'],
-    className: 'txt_garage-title',
-  },
-  pageTitle: {
-    text: 'Page #_pageNumber_',
-    parameterFields: ['_pageNumber_'],
-    className: 'txt_text-title',
-  },
-  gameTitle: {
-    text: 'Async RACE',
-    parameterFields: [],
-    className: 'page-field__game-title',
-  },
-  carName: {
-    text: '_carName_',
-    parameterFields: ['_carName_'],
-    className: 'txt_car-name',
-  },
-};
-
-export const TRACK_LINES_PAGE_LIMIT = {
-  queryParam: '_limit',
-  number: 7,
-};
-
-export const GARAGE_PAGE = {
-  queryParam: '_page',
-  totalCarsNumberHeader: 'X-Total-Count',
-  number: 1,
-};
-
-export const SERVER_ERROR = {
-  messageFromServer: 'Failed to fetch',
-  messageToUser: 'Server is probably not running',
-  messageToUserClassList: 'server-error',
-};
-
-export const ENGINE_STATUS_ELEMENT_CLASS = {
-  wrecked: 'car-field_engine-wrecked',
-  on: 'car-field_engine-on',
-};
-
-export const REQUEST_PARAMS = {
-  engineStarted: { name: 'status', value: 'started' },
-  engineStopped: { name: 'status', value: 'stopped' },
-};
-
-export const CAR_ENGINE_STATUS_PARAMETER_NAME = 'status';
-
-export const CAR_ENGINE_STATUS = {
-  engineStarted: 'started',
-  engineStopped: 'stopped',
-};
-
-export const RACE_STATUS = {
-  started: 'started',
-  stopped: 'stopped',
 };
 
 export const CAR_INLINE_SVG = `<svg id="svg2" version="1.1" viewBox="0 0 960 476" inkscape:version="0.91 r13725">

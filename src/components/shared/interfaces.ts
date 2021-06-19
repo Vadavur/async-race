@@ -10,6 +10,12 @@ export interface CarDataInterface {
   id: number;
 }
 
+export interface WinnerDataInterface {
+  id: number;
+  wins: number;
+  time: number;
+}
+
 export interface RaceData {
   velocity: number;
   distance: number;
@@ -21,6 +27,6 @@ export interface CarsOnPageDataInterface {
 }
 
 export interface WinnersOnPageDataInterface {
-  winnersOnPageData: CarDataInterface[];
+  winnersOnPageData: WinnerDataInterface[];
   allWinnersNumber: number;
 }

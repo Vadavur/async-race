@@ -2,7 +2,7 @@ import './garage-field.scss';
 import {
   BUTTONS,
   INPUTS_ATTRIBUTES,
-  INITIAL_PAGE_NUMBER,
+  INITIAL_VALUES,
 } from '../shared/constants';
 import { BaseComponent } from '../shared/base-component';
 import { ButtonComponent } from '../shared/button-component/button-component';
@@ -44,7 +44,7 @@ export class GarageField extends BaseComponent {
     this.buttonField.appendChild(this.previousPageButton.element);
     this.buttonField.appendChild(this.nextPageButton.element);
 
-    this.currentPageNumber = INITIAL_PAGE_NUMBER;
+    this.currentPageNumber = INITIAL_VALUES.pageNumber;
 
     this.createCarForm = new CarDataForm(
       INPUTS_ATTRIBUTES.createCarName,
@@ -83,9 +83,5 @@ export class GarageField extends BaseComponent {
     this.raceField.element.remove();
     this.raceField = new RaceField(this.currentPageNumber);
     this.element.insertBefore(this.raceField.element, this.buttonField);
-    // const garageFieldElements = this.element.childNodes;
-    // garageFieldElements[garageFieldElements.length - 1].remove();
-    // this.raceField = new RaceField(this.currentPageNumber);
-    // this.element.appendChild(this.raceField.element);
   }
 }

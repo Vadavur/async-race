@@ -68,3 +68,15 @@
   animation: blink 1s step-start 0s infinite;
   -webkit-animation: blink 1s step-start 0s infinite;
 }
+
+.car-field_score-view {
+  width: 5rem;
+  height: 2.5rem;
+}
+
+.car-field_score-view::before {
+  width: 1.15rem;
+  height: 1rem;
+  font-size: 0.55rem;
+  left: 1.35rem;
+}

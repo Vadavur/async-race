@@ -1,9 +1,5 @@
 import { DataBaseService } from './data-base-service';
-import {
-  URL_PATHS,
-  GARAGE_PAGE,
-  TRACK_LINES_PAGE_LIMIT,
-} from '../shared/constants';
+import { URL_PATHS, QUERIES } from '../shared/constants';
 import {
   CarsOnPageDataInterface,
   CarDataInterface,
@@ -14,13 +10,13 @@ export class CarsDataService extends DataBaseService {
     pageNumber: number
   ): Promise<CarsOnPageDataInterface> {
     const request = this.createUrlRequest(URL_PATHS.garage, [
-      [TRACK_LINES_PAGE_LIMIT.queryParam, `${TRACK_LINES_PAGE_LIMIT.number}`],
-      [GARAGE_PAGE.queryParam, `${pageNumber}`],
+      [QUERIES.garage.pageLimit.parameter, `${QUERIES.garage.pageLimit.value}`],
+      [QUERIES.garage.pageNumber.parameter, `${pageNumber}`],
     ]);
     const response = await fetch(request);
     const carsOnPageData = await response.json();
     const allCarsNumber = response.headers.get(
-      GARAGE_PAGE.totalCarsNumberHeader
+      QUERIES.garage.pageNumber.totalCarsNumberHeader
     );
 
     return {

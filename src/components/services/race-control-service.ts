@@ -1,5 +1,5 @@
 import {
-  ENGINE_STATUS_ELEMENT_CLASS,
+  CLASSES,
   REQUEST_PARAMS,
   CAR_ENGINE_STATUS,
   RACE_STATUS,
@@ -90,7 +90,7 @@ export class RaceControlService {
 
   public setTestControlButtons(): void {
     this.startTestButton.addEventListener('click', () => {
-      this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
+      this.carElement.classList.remove(CLASSES.engineStatus.wrecked);
       this.runEngine();
     });
     this.stopTestButton.setAttribute('disabled', '');
@@ -103,8 +103,8 @@ export class RaceControlService {
 
   private runEngine(): void {
     this.startTestButton.setAttribute('disabled', '');
-    this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
-    this.carElement.classList.add(ENGINE_STATUS_ELEMENT_CLASS.on);
+    this.carElement.classList.remove(CLASSES.engineStatus.wrecked);
+    this.carElement.classList.add(CLASSES.engineStatus.on);
     this.carElement.setAttribute(
       'engineStatus',
       CAR_ENGINE_STATUS.engineStarted
@@ -175,7 +175,7 @@ export class RaceControlService {
           this.carElement.getAttribute('engineStatus') ===
           CAR_ENGINE_STATUS.engineStarted
         ) {
-          this.carElement.classList.add(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
+          this.carElement.classList.add(CLASSES.engineStatus.wrecked);
           this.stopEngine();
         }
       });
@@ -217,7 +217,7 @@ export class RaceControlService {
         'engineStatus',
         CAR_ENGINE_STATUS.engineStopped
       );
-      this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.on);
+      this.carElement.classList.remove(CLASSES.engineStatus.on);
       if (RaceControlService.raceStatus === RACE_STATUS.stopped) {
         this.startTestButton.removeAttribute('disabled');
       }
@@ -234,7 +234,7 @@ export class RaceControlService {
     ) {
       this.stopEngine();
     }
-    this.carElement.classList.remove(ENGINE_STATUS_ELEMENT_CLASS.wrecked);
+    this.carElement.classList.remove(CLASSES.engineStatus.wrecked);
     this.carElement.style.transform = `translateX(0)`;
   }
 }

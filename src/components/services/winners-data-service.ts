@@ -1,23 +1,29 @@
 import { DataBaseService } from './data-base-service';
+import { URL_PATHS, QUERIES } from '../shared/constants';
 import {
-  URL_PATHS,
-  GARAGE_PAGE,
-  TRACK_LINES_PAGE_LIMIT,
-} from '../shared/constants';
-import { WinnersOnPageDataInterface } from '../shared/interfaces';
+  WinnersOnPageDataInterface,
+  WinnerDataInterface,
+} from '../shared/interfaces';
 
 export class WinnersDataService extends DataBaseService {
   public static async getWinnersOnPageData(
-    pageNumber: number
+    pageNumber: number,
+    sortType: string,
+    sortOrder: string
   ): Promise<WinnersOnPageDataInterface> {
-    const request = this.createUrlRequest(URL_PATHS.garage, [
-      [TRACK_LINES_PAGE_LIMIT.queryParam, `${TRACK_LINES_PAGE_LIMIT.number}`],
-      [GARAGE_PAGE.queryParam, `${pageNumber}`],
+    const request = this.createUrlRequest(URL_PATHS.winners, [
+      [
+        QUERIES.winners.pageLimit.parameter,
+        `${QUERIES.winners.pageLimit.value}`,
+      ],
+      [QUERIES.winners.pageNumber.parameter, `${pageNumber}`],
+      [QUERIES.winners.sortType.parameter, `${sortType}`],
+      [QUERIES.winners.sortOrder.parameter, `${sortOrder}`],
     ]);
     const response = await fetch(request);
     const winnersOnPageData = await response.json();
     const allWinnersNumber = response.headers.get(
-      GARAGE_PAGE.totalCarsNumberHeader
+      QUERIES.winners.pageNumber.totalWinnersNumberHeader
     );
 
     return {
@@ -26,53 +32,48 @@ export class WinnersDataService extends DataBaseService {
     };
   }
 
-  // public static async createCar(dataParams: BodyInit): Promise<Response> {
-  //   const carCreateHeader = {
-  //     'Content-Type': 'application/json',
-  //   };
-  //   const request = this.createUrlRequest(URL_PATHS.garage, []);
-  //   const response = await fetch(request, {
-  //     method: 'POST',
-  //     body: dataParams,
-  //     headers: carCreateHeader,
-  //   });
+  public static async getWinnerById(id: number): Promise<WinnerDataInterface> {
+    const request = this.createUrlRequest(`${URL_PATHS.winners}/${id}`, []);
+    const response = await fetch(request, { method: 'GET' });
 
-  //   return response.json();
-  // }
+    return response.json();
+  }
 
-  // public static async updateCar(
-  //   id: number,
-  //   dataParams: BodyInit
-  // ): Promise<Response> {
-  //   const carUpdateRequestParam = 'id';
-  //   const carUpdateHeader = {
-  //     'Content-Type': 'application/json',
-  //   };
-  //   const request = this.createUrlRequest(URL_PATHS.garage, [
-  //     [carUpdateRequestParam, `${id}`],
-  //   ]);
-  //   const response = await fetch(request, {
-  //     method: 'PUT',
-  //     body: dataParams,
-  //     headers: carUpdateHeader,
-  //   });
+  public static async createWinner(dataParams: BodyInit): Promise<Response> {
+    const carCreateHeader = {
+      'Content-Type': 'application/json',
+    };
+    const request = this.createUrlRequest(URL_PATHS.winners, []);
+    const response = await fetch(request, {
+      method: 'POST',
+      body: dataParams,
+      headers: carCreateHeader,
+    });
 
-  //   return response.json();
-  // }
+    return response.json();
+  }
 
-  // public static async deleteCar(id: number): Promise<Response> {
-  //   const carDeleteRequestParam = 'id';
-  //   const request = this.createUrlRequest(URL_PATHS.garage, [
-  //     [carDeleteRequestParam, `${id}`],
-  //   ]);
-  //   const response = await fetch(request, { method: 'DELETE' });
+  public static async updateWinner(
+    id: number,
+    dataParams: BodyInit
+  ): Promise<Response> {
+    const carUpdateHeader = {
+      'Content-Type': 'application/json',
+    };
+    const request = this.createUrlRequest(`${URL_PATHS.winners}/${id}`, []);
+    const response = await fetch(request, {
+      method: 'PUT',
+      body: dataParams,
+      headers: carUpdateHeader,
+    });
 
-  //   return response;
-  // }
+    return response.json();
+  }
 
-  // public static async getAllCars(): Promise<CarDataInterface[]> {
-  //   const response = await fetch(`${BASE_URL}/${URL_PATHS.garage}`);
-  //   const allCarsData = await response.json();
-  //   return allCarsData;
-  // }
+  public static async removeWinner(id: number): Promise<Response> {
+    const request = this.createUrlRequest(`${URL_PATHS.winners}/${id}`, []);
+    const response = await fetch(request, { method: 'DELETE' });
+
+    return response;
+  }
 }
