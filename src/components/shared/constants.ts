@@ -37,6 +37,8 @@ export const INITIAL_VALUES = {
   pageNumber: 1,
   sortType: 'wins',
   sortOrder: 'DESC',
+  garagePageLimit: 7,
+  winnersPageLimit: 10,
 };
 
 export const QUERIES = {

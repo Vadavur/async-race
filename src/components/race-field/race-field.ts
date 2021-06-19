@@ -10,7 +10,7 @@ import { TrackSection } from '../track-section/track-section';
 export class RaceField extends BaseComponent {
   private currentPageNumber: number;
 
-  private carsNumber?: number;
+  carsNumber?: number;
 
   private garageTitle?: TextComponent;
 

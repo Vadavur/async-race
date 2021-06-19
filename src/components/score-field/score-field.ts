@@ -20,7 +20,7 @@ export class ScoreField extends BaseComponent {
 
   private currentSortOrder: string;
 
-  private winnersNumber?: number;
+  winnersNumber?: number;
 
   private winnersTitle?: TextComponent;
 
