@@ -1,0 +1,12 @@
+.race-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.server-error {
+  color: red;
+  font-size: 5rem;
+}

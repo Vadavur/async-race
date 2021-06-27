@@ -1,0 +1,14 @@
+.garage-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  z-index: 3;
+}
+
+.garage-field__button-field {
+  width: 20rem;
+  height: 3rem;
+  margin: 0.5rem;
+}

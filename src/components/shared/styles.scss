@@ -1,0 +1,15 @@
+$bodyColor: chocolate;
+$basicFont: "Roboto", sans-serif;
+
+body {
+  background-color: $bodyColor;
+  position: relative;
+  overflow-x: hidden;
+  background-image: url("/public/asphalt.jpg");
+  background-position: center;
+  background-size: 40rem;
+}
+
+* {
+  font-family: $basicFont;
+}
