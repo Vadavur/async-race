@@ -1,3 +1,5 @@
+@import '../shared/styles.scss';
+
 .car-field {
   width: 6rem;
   height: 3rem;
@@ -10,10 +12,6 @@
   z-index: 10;
 }
 
-.car-lights {
-  fill: #212121;
-}
-
 .car-field::before {
   width: 1.1rem;
   height: 1.1rem;
@@ -24,12 +22,12 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  border: 0.1rem solid #ffffff;
+  border: 0.1rem solid $carRoofNumberColor;
   border-radius: 50%;
   position: absolute;
   left: 1.8rem;
   top: center;
-  color: #ffffff;
+  color: $carRoofNumberColor;
   mix-blend-mode: difference;
 }
 
@@ -41,14 +39,10 @@
   z-index: -1;
   left: 2.7rem;
   top: -0.5rem;
-  background-image: url("/public/oil-spill.png");
+  background-image: url($spilledOilImage);
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0.6;
-}
-
-.car-field_engine-on .car-lights {
-  fill: #f8fad7;
 }
 
 @keyframes blink {
@@ -63,10 +57,22 @@
   }
 }
 
-.car-field_engine-wrecked .car-lights {
-  fill: #ffa600;
-  animation: blink 1s step-start 0s infinite;
-  -webkit-animation: blink 1s step-start 0s infinite;
+.car-lights {
+  fill: $carLightsOffColor;
+}
+
+.car-field_engine-on {
+  .car-lights{
+    fill: $carLightsOnColor;
+  }
+}
+
+.car-field_engine-wrecked {
+  .car-lights {
+    fill: $carLightsBlinkColor;
+    animation: $blinkingAnimation;
+    -webkit-animation: $blinkingAnimation;
+  }
 }
 
 .car-field_score-view {
