@@ -36,6 +36,7 @@ Without starting a server a warning would be printed on the "Garage" view and ap
 - Async coding / Promises
 - JS Animations
 - DOM Api
+- SVG editing
 - Webpack
 - Eslint
 - GIT
