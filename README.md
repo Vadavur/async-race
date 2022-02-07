@@ -29,7 +29,6 @@ Without starting a server a warning would be printed on the "Garage" view and ap
 
 * Key skills used to create this application:
 
-- Webpack
 - Typescript
 - SCSS
 - Components based design
@@ -37,5 +36,6 @@ Without starting a server a warning would be printed on the "Garage" view and ap
 - Async coding / Promises
 - JS Animations
 - DOM Api
+- Webpack
 - Eslint
 - GIT
