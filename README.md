@@ -31,6 +31,7 @@ Without starting a server a warning would be printed on the "Garage" view and ap
 
 - Typescript
 - SCSS
+- BEM
 - Components based design
 - Сommunication with a server (fetch, REST API)
 - Async coding / Promises
